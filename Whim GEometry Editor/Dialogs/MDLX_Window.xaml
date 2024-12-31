@@ -1,0 +1,18 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.MDLX_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d"
+        Closing="ClosingW"
+        KeyDown="Window_KeyDown"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="MDLX Converter" Height="300" Width="300">
+    <Label Name="DropFrame" BorderThickness="2" BorderBrush="Black"
+           Margin="10" Content="Drop files here" 
+           HorizontalContentAlignment="Center"
+           VerticalContentAlignment="Center" AllowDrop="True" DragDrop.Drop="DropFrame_Drop"
+           />
+</Window>

@@ -1,0 +1,20 @@
+﻿Whim Model Editor
+
+
+winexe
+C#
+.cs
+C:\Github\Whim GEometry Editor\Whim GEometry Editor\obj\Debug\net8.0-windows7.0\
+Whim_GEometry_Editor
+none
+false
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP
+C:\Github\Whim GEometry Editor\Whim GEometry Editor\App.xaml
+601229768841
+11274168858
+100-1588086240
+211-1202392504
+Dialogs\About_w.xaml;Dialogs\AdjustAll.xaml;Dialogs\ArrangeVertices_Window.xaml;Dialogs\AttachInfoGeosets.xaml;Dialogs\CMessageBox.xaml;Dialogs\CreatePlane.xaml;Dialogs\Create_Shape.xaml;Dialogs\Create_Skeleton.xaml;Dialogs\CustomCamera.xaml;Dialogs\drawintriangle_window.xaml;Dialogs\DrawWindow.xaml;Dialogs\DuplicateAlongAxis_Window.xaml;Dialogs\DuplicateSequence.xaml;Dialogs\EditEventObject.xaml;Dialogs\EditGeoset_Propertoes.xaml;Dialogs\Editor_Emitter1.xaml;Dialogs\editor_emitter2.xaml;Dialogs\Editor_Light.xaml;Dialogs\Editor_Ribbon.xaml;Dialogs\edit_Attachment.xaml;Dialogs\edit_geo_vis.xaml;Dialogs\edit_keyframe.xaml;Dialogs\Error_Window.xaml;Dialogs\Explanation.xaml;Dialogs\gettingstarted.xaml;Dialogs\import_animations.xaml;Dialogs\import_geoset.xaml;Dialogs\InputCoordinate.xaml;Dialogs\MDLX_Window.xaml;Dialogs\MirrorSequence.xaml;Dialogs\MultipleSequence.xaml;Dialogs\NewModelWindow.xaml;Dialogs\quickClean.xaml;Dialogs\remap_sq.xaml;Dialogs\ResizeSequence.xaml;Dialogs\SelectTransformations.xaml;Dialogs\SequencesSelector.xaml;Dialogs\SetDistanceDialog.xaml;Dialogs\Settings.xaml;Dialogs\simple_anim.xaml;Dialogs\SplitSEquenceDialog.xaml;Dialogs\TextReader.xaml;Dialogs\TextureProperties.xaml;Dialogs\ToFitIn.xaml;editgs.xaml;ErrorChecker.xaml;geosetanims.xaml;Input.xaml;listbones.xaml;MainWindow.xaml;Material_Manager.xaml;Node Editors\bone_Data_editor.xaml;Node Editors\Edit_Cols.xaml;NodePropertiesEditor.xaml;Optimizer.xaml;Selector.xaml;sequence.xaml;Texture_Animation.xaml;Texture_Manager.xaml;Transformation.xaml;
+
+False
+

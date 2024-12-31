@@ -1,0 +1,233 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.editor_emitter2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d"
+           ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    Background="LightGray"
+    Title="Edit Emitter2" Height="750" Width="720">
+    <Grid ShowGridLines="True" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!-- VISIBILITY -->
+        <TextBlock Text="Visibility:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox Name="Check_Visibility" Content="Visible" Checked="Checked_Visibility" Unchecked="Checked_Visibility"  Grid.Column="1"  Cursor="Hand" Background="White" Grid.Row="0" Width="80" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox Name="Check_AnimatedVisibility" Checked="Checked_AnimatedVisibility" Unchecked="Checked_AnimatedVisibility" Content="Animated" Grid.Column="2" Grid.Row="0" Margin="5"/>
+        <Button Content="Edit" Name="ButtonEditVisibility" Click="SetAnimatedVisibility" Cursor="Hand" Grid.Column="2" Grid.Row="0"  Margin="5" VerticalAlignment="Bottom"/>
+        <!-- EMISSION RATE -->
+        <TextBlock Text="Emission Rate:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxEmissionRate"  TextChanged="SetEmissionRate" Grid.Column="1"  Cursor="Hand" Background="White" Grid.Row="1" Width="80" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox Name="Check_AnimatedEmissionRate" Checked="Checked_AnimatedEmissionRate" Unchecked="Checked_AnimatedEmissionRate" Content="Animated" Grid.Column="2" Grid.Row="1" Margin="5"/>
+        <Button Content="Edit" Name="ButtonEmissionRate" Click="SetAnimatedEmissionRate" Cursor="Hand" Grid.Column="2" Grid.Row="1"  Margin="5" VerticalAlignment="Bottom"/>
+        <!-- SPEED -->
+        <TextBlock Text="Speed:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxSpeed"  TextChanged="SetSpeed" Grid.Column="1"  Cursor="Hand" Background="White" Grid.Row="2" Width="80" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox Name="Check_AnimatedSpeed" Checked="Checked_AnimatedSpeed" Unchecked="Checked_AnimatedSpeed" Content="Animated" Grid.Column="2" Grid.Row="2" Margin="5"/>
+        <Button Content="Edit" Name="ButtonEditSpeed" Click="SetAnimatedSpeed" Cursor="Hand" Grid.Column="2" Grid.Row="2"  Margin="5" VerticalAlignment="Bottom"/>
+        <!-- VARIATION -->
+        <TextBlock Text="Variation:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxVariation"  TextChanged="SetVariation" Grid.Column="1"  Cursor="Hand" Background="White" Grid.Row="3" Width="80" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox Name="Check_AnimatedVariation" Checked="Checked_AnimatedVariation" Unchecked="Checked_AnimatedVariation" Content="Animated" Grid.Column="2" Grid.Row="3" Margin="5"/>
+        <Button Content="Edit" Name="ButtonAnimatedVariation" Click="SetAnimatedVar" Cursor="Hand" Grid.Column="2" Grid.Row="3"  Margin="5" VerticalAlignment="Bottom"/>
+        <!-- LATITUDE -->
+        <TextBlock Text="Latitude:" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxLatitude"  TextChanged="SetLAtitude" Grid.Column="1"  Cursor="Hand" Background="White" Grid.Row="4" Width="80" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox Name="Check_AnimatedLatitude" Checked="Checked_AnimatedLatitude" Unchecked="Checked_AnimatedLatitude" Content="Animated" Grid.Column="2" Grid.Row="4" Margin="5"/>
+        <Button Content="Edit" Name="ButtonAnimatedLatitude" Click="SetAnimatedLatitude" Cursor="Hand" Grid.Column="2" Grid.Row="4"  Margin="5" VerticalAlignment="Bottom"/>
+        <!-- WIDTH -->
+        <TextBlock Text="Width:" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxWidth"  TextChanged="SetWith" Grid.Column="1"  Cursor="Hand" Background="White" Grid.Row="5" Width="80" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox Name="Check_AnimatedWidth" Checked="Checked_AnimatedWidth" Unchecked="Checked_AnimatedWidth" Content="Animated" Grid.Column="2" Grid.Row="5" Margin="5"/>
+        <Button Content="Edit" Name="ButtonAnimatedWidth" Click="SetAnimatedWidth" Cursor="Hand" Grid.Column="2" Grid.Row="5"  Margin="5" VerticalAlignment="Bottom"/>
+        <!-- LENGTH -->
+        <TextBlock Text="Length:" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxLEngth"  TextChanged="SetLength" Grid.Column="1"  Cursor="Hand" Background="White" Grid.Row="6" Width="80" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox Name="Check_AnimatedLength" Checked="Checked_AnimatedLength" Unchecked="Checked_AnimatedLength" Content="Animated" Grid.Column="2" Grid.Row="6" Margin="5"/>
+        <Button Content="Edit" Name="ButtonAnimatedLength" Click="SetAnimatedLength" Cursor="Hand" Grid.Column="2" Grid.Row="6"  Margin="5" VerticalAlignment="Bottom"/>
+        <!-- GRAVITY -->
+        <TextBlock Text="Gravity:" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxGravity"  TextChanged="SetGRavity" Grid.Column="1"  Cursor="Hand" Background="White" Grid.Row="7" Width="80" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox Name="Check_Gravity" Checked="Checked_Gravity" Unchecked="Checked_Gravity" Content="Animated" Grid.Column="2" Grid.Row="7" Margin="5"/>
+        <Button Content="Edit" Name="ButtonAnimateGravity" Click="SetAnimatedGravity" Cursor="Hand" Grid.Column="2" Grid.Row="7"  Margin="5" VerticalAlignment="Bottom"/>
+
+        
+        <!--   texture id-->
+        <TextBlock Text="Texure ID:" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox Name="Combo_Textures" SelectionChanged="SelectedTexture" Width="260" Grid.Column="4" Grid.Row="0" Height="20"  Grid.ColumnSpan="3"/>
+        <!--  filter mode-->
+        <TextBlock Text="Filter Mode:" Grid.Column="3" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox Name="Combo_FilterMode" SelectionChanged="SelectedFilterMode" Width="260" Grid.Column="4" Grid.Row="1" Height="20"  Grid.ColumnSpan="3"/>
+        <!--    Flags   -->
+        <TextBlock Text="Flags:" Grid.Column="3" Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel  Grid.Column="4" Grid.Row="2">
+            <CheckBox Content="Unshaded" Name="Check_Unshaded" Checked="Checked_Unshaded" Unchecked="Checked_Unshaded"/>
+            <CheckBox Content="Unfogged" Name="Check_Unfogged" Checked="Checked_Unfogged" Unchecked="Checked_Unfogged"/>
+            <CheckBox Content="AlphaKey" Name="Check_AlphaKey" Checked="Checked_AlphaKey" Unchecked="Checked_AlphaKey"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="5" Grid.Row="2">
+            <CheckBox Content="Line Emitter" Name="Check_LineEmitter" Checked="Checked_LineEmitter" Unchecked="Checked_LineEmitter"/>
+            <CheckBox Content="Sort Primitives Far Z" Name="Check_Sort" Checked="Checked_Sort" Unchecked="Checked_Sort"/>
+            <CheckBox Content="Model Space" Name="Check_ModelSpace" Checked="Checked_ModelSpace" Unchecked="Checked_ModelSpace"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="4" Grid.Row="3">
+            <CheckBox Content="XY Quad" Name="Check_XYQuad" Checked="Checked_XYQuad" Unchecked="Checked_XYQuad"/>
+            <CheckBox Content="Squirt" Name="Check_Squirt" Checked="Checked_Squirt" Unchecked="Checked_Squirt"/>
+             
+        </StackPanel>
+        <StackPanel  Grid.Column="5" Grid.Row="3">
+            <CheckBox Content="Head" Name="Check_Head" Checked="Checked_Head" Unchecked="Checked_Head"/>
+            <CheckBox Content="Tail" Name="Check_Tail" Checked="Checked_Tail" Unchecked="Checked_Tail"/>
+
+        </StackPanel>
+        <!-- color segment 1 -->
+        <TextBlock Text="Segment 1:" Grid.Column="3" Grid.Row="4" TextAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel  Grid.Column="4" Grid.Row="4" >
+            <TextBlock Text="Color" HorizontalAlignment="Center"/>
+            <Button Name="ButtonColor1" Click="SetColor1" Height="20" Width="80"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="5" Grid.Row="4" >
+            <TextBlock Text="Alpha %" HorizontalAlignment="Center"/>
+            <TextBox Name="ButtonAlpha" TextChanged="SetAlpha1" Height="20" Width="80"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="6" Grid.Row="4" >
+            <TextBlock Text="Scaling" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxScaling1" TextChanged="SetScaling1" Height="20" Width="80"/>
+        </StackPanel>
+        <!-- color segment 2 -->
+        <TextBlock Text="Segment 2:" Grid.Column="3" Grid.Row="5" TextAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel  Grid.Column="4" Grid.Row="5" >
+            <TextBlock Text="Color" HorizontalAlignment="Center"/>
+            <Button Name="ButtonColor2" Click="SetColor2" Height="20" Width="80"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="5" Grid.Row="5" >
+            <TextBlock Text="Alpha %" HorizontalAlignment="Center"/>
+            <TextBox Name="ButtonAlpha2" TextChanged="SetAlpha2" Height="20" Width="80"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="6" Grid.Row="5" >
+            <TextBlock Text="Scaling" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxScaling2" TextChanged="SetScaling2" Height="20" Width="80"/>
+        </StackPanel>
+        <!-- color segment 3 -->
+        <TextBlock Text="Segment 3:" Grid.Column="3" Grid.Row="6" TextAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel  Grid.Column="4" Grid.Row="6" >
+            <TextBlock Text="Color" HorizontalAlignment="Center"/>
+            <Button Name="ButtonColor3" Click="SetColor3" Height="20" Width="80"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="5" Grid.Row="6" >
+            <TextBlock Text="Alpha %" HorizontalAlignment="Center"/>
+            <TextBox Name="ButtonAlpha3" TextChanged="SetAlpha3" Height="20" Width="80"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="6" Grid.Row="6" >
+            <TextBlock Text="Scaling" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxScaling3" TextChanged="SetScaling3" Height="20" Width="80"/>
+        </StackPanel>
+        <!-- rows-->
+        <TextBlock Text="Rows:" Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxRows" TextChanged="SetRows" Grid.Column="1" Grid.Row="8" Height="20" Width="80"/>
+        <!-- columns-->
+        <TextBlock Text="Columns:" Grid.Column="0" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxColumns" TextChanged="SetColumn" Grid.Column="1" Grid.Row="9" Height="20" Width="80"/>
+        <!-- rows-->
+        <TextBlock Text="Lifespan:" Grid.Column="0" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxLifespan" TextChanged="SetLifespan" Grid.Column="1" Grid.Row="10" Height="20" Width="80"/>
+        <!-- priority plane-->
+        <TextBlock Text="Priority Plane:" Grid.Column="0" Grid.Row="11" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxPriorityPlane" TextChanged="SetPP" Grid.Column="1" Grid.Row="11" Height="20" Width="80"/>
+        <!-- replaceable id-->
+        <TextBlock Text="Repalceable ID:" Grid.Column="0" Grid.Row="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxReplaceAbleID" TextChanged="SetRID" Grid.Column="1" Grid.Row="12" Height="20" Width="80"/>
+        <!--  time-->
+        <TextBlock Text="Time:" Grid.Column="0" Grid.Row="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxTime" TextChanged="SetTime" Grid.Column="1" Grid.Row="13" Height="20" Width="80"/>
+        <!-- Tail length-->
+        <TextBlock Text="Tail Length:" Grid.Column="3" Grid.Row="11" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="BoxTailLength" TextChanged="SetTailLen" Grid.Column="4" Grid.Row="11" Height="20" Width="80"/>
+        <!--    head lifespan-->
+        <TextBlock Text="Head (Lifespan)" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="7" VerticalAlignment="Center"/>
+        <StackPanel   Grid.Column="4" Grid.Row="7" >
+            <TextBlock Text="Start" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxHeadLifespanStart" TextChanged="SetHeadLifespanStart" Height="20" Width="80"/>
+        </StackPanel>
+
+        <StackPanel   Grid.Column="5" Grid.Row="7" >
+            <TextBlock Text="End" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxHeadLifespanEnd" TextChanged="SetHeadLifespanEnd" Height="20" Width="80"/>
+        </StackPanel>
+        <StackPanel   Grid.Column="6" Grid.Row="7" >
+            <TextBlock Text="Repeat" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxHeadLifespanRepeat" TextChanged="SetHeadLifespanRepeat" Height="20" Width="80"/>
+        </StackPanel>
+        <!--    head decay-->
+        <TextBlock Text="Head (Decay)" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="8" VerticalAlignment="Center"/>
+        <StackPanel   Grid.Column="4" Grid.Row="8" >
+            <TextBlock Text="Start" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxHeadDecayStart" TextChanged="SetHeadDecayStart" Height="20" Width="80"/>
+        </StackPanel>
+
+        <StackPanel   Grid.Column="5" Grid.Row="8" >
+            <TextBlock Text="End" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxHeadDecayEnd" TextChanged="SetHeadDecayEnd" Height="20" Width="80"/>
+        </StackPanel>
+        <StackPanel   Grid.Column="6" Grid.Row="8" >
+            <TextBlock Text="Repeat" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxHeadDecayRepeat" TextChanged="SetHeadDecayRepeat" Height="20" Width="80"/>
+        </StackPanel>
+        <!--    Tail Lifespan  -->
+        <TextBlock Text="Tail (Lifespan)" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="9" VerticalAlignment="Center"/>
+        <StackPanel   Grid.Column="4" Grid.Row="9" >
+            <TextBlock Text="Start" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxTailLifespanStart" TextChanged="SetTailLifespanStart" Height="20" Width="80"/>
+        </StackPanel>
+
+        <StackPanel   Grid.Column="5" Grid.Row="9" >
+            <TextBlock Text="End" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxTailLifespanEnd" TextChanged="SetTailLifespanEnd" Height="20" Width="80"/>
+        </StackPanel>
+        <StackPanel   Grid.Column="6" Grid.Row="9" >
+            <TextBlock Text="Repeat" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxTailLifespanREpeat" TextChanged="SetTailLifespanRepeat" Height="20" Width="80"/>
+        </StackPanel>
+        <!--    Tail Decay  -->
+        <TextBlock Text="Tail (Decay)" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="10" VerticalAlignment="Center"/>
+        <StackPanel   Grid.Column="4" Grid.Row="10" >
+            <TextBlock Text="Start" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxTailDecayStart" TextChanged="SetTailDecayStart" Height="20" Width="80"/>
+        </StackPanel>
+
+        <StackPanel   Grid.Column="5" Grid.Row="10" >
+            <TextBlock Text="End" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxTailDecayEnd" TextChanged="SetTailDecayEnd" Height="20" Width="80"/>
+        </StackPanel>
+        <StackPanel   Grid.Column="6" Grid.Row="10" >
+            <TextBlock Text="Repeat" HorizontalAlignment="Center"/>
+            <TextBox Name="BoxTailDecayREpeat" TextChanged="SetTailDecayRepeat" Height="20" Width="80"/>
+        </StackPanel>
+    
+    </Grid>
+</Window>

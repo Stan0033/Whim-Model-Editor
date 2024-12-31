@@ -1,0 +1,91 @@
+[Up]
+Move view up
+
+[Down]
+Move view down
+
+[Ctrl + O]
+Open model
+
+[Ctrl + S]
+Save model
+
+[Alt + S]
+Save model as
+
+[Ctrl + Z]
+Undo action
+
+[Ctrl + Y]
+Redo action
+
+[V]
+Switch to vertices mode
+
+[G]
+Switch to geosets mode
+
+[E]
+Switch to edges mode
+
+[T]
+Switch to triangles mode
+
+[N]
+Switch to nodes mode
+
+[U]
+Switch to UV mode
+
+[I]
+Switch to rigging mode
+
+[A]
+Switch to animator mode
+
+[P]
+Switch to sculpt mode
+
+[L]
+Switch to normals mode
+
+[Delete]
+Delete selected object in scene
+
+[S]
+Reset camera
+
+[For UV Editor:]
+
+[M]
+Switch to select mode
+
+[C]
+Switch to scale mode
+
+[R]
+Switch to rotate mode
+
+[Z]
+Switch to select mode
+
+[Left-Mouse Button]
+depending the current mode:
+In select mode: select or draw selection rectangle
+In sculpt mode: push geometry
+In different modify modes: modify geometry
+
+[Right-Mouse Button]
+call geometry modifiers contextmenu
+in sculpt mode: pull geometry
+
+[Middle-Mouse Button]
+Toggle on/off camera rotation mode
+
+
+
+
+
+
+
+

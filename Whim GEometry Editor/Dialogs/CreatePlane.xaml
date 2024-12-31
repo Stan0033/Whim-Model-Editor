@@ -1,0 +1,28 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.CreatePlane"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d"
+        Background="LightGray"
+        KeyDown="Window_KeyDown"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="Create Plane" Height="200" Width="200">
+    <StackPanel Margin="10">
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Columns" Width="50"/>
+            <TextBox Name="InputColumns" Width="100" Text="1"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Rows" Width="50"/>
+            <TextBox Name="InputRows" Width="100" Text="1"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Cell Size:" Width="50"/>
+            <TextBox Name="InputCell" Width="100" Text="1"></TextBox>
+        </StackPanel>
+        <Button Click="Create" Padding="10" Margin="10">Create</Button>
+    </StackPanel>
+</Window>

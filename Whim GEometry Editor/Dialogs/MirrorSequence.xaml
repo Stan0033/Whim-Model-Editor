@@ -1,0 +1,23 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.MirrorSequence"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d"
+        Background="LightGray"
+        ResizeMode="NoResize"
+        KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterScreen"
+        Title="Mirror Sequence/Keyframes" Height="220" Width="200">
+    <StackPanel Margin="10">
+        <RadioButton x:Name="Radio_0" IsChecked="True">No Swap</RadioButton>
+        <RadioButton x:Name="Radio_1">Swap Xs and Ys</RadioButton>
+        <RadioButton x:Name="Radio_2">Swap Xs and Zs</RadioButton>
+        <RadioButton x:Name="Radio_3">Swap Ys and Zs</RadioButton>
+        <CheckBox Name="Check_1">Negate Xs</CheckBox>
+        <CheckBox Name="Check_2">Negate Ys</CheckBox>
+        <CheckBox Name="Check_3">Negate Zs</CheckBox>
+        <Button Name="ButtonOK" Click="ok" Padding="10" Margin="10">OK</Button>
+    </StackPanel>
+</Window>

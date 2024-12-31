@@ -1,0 +1,1052 @@
+﻿<Window x:Class="Whim_Model_Editor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_Model_Editor" xmlns:sharpGL1="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
+        mc:Ignorable="d"
+        SizeChanged="Resized"
+        Closing="ClosingApp"
+        Loaded="Loadedd"
+        KeyDown="GlobalHotkey"
+        KeyUp="GlobalHotkeyRelease"
+        Title="" Height="450" Width="800" MinHeight="450" MinWidth="800" Background="#FF404040">
+
+    <Grid Name="MainGrid">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"></ColumnDefinition>
+            <!-- the side menu-->
+            <ColumnDefinition Width="*"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <!-- the top menu -->
+            <RowDefinition Height="220" Name="Row_ViewPort"/>
+            <!-- the viewport -->
+            <RowDefinition Height="70" Name="Row_Mapper" />
+            <!-- the uv mapper or the animator  -->
+            <RowDefinition Height="160" Name="Row_Sequences"/>
+            <!-- the uv mapper or the animator  -->
+
+        </Grid.RowDefinitions>
+
+        <Menu Name="TopMenu"  VerticalAlignment="Top" Height="20" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Background="LightGray">
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="App">
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="About_app"   Width="200"  Cursor="Hand"    Header="About"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="GetChangeLog"   Width="200"  Cursor="Hand"    Header="Changelog"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Register Extensions" Click="RegisterExtensions"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="callSettings"   Width="200"  Cursor="Hand"    Header="Settings"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="Exitapp"   Width="200"  Cursor="Hand"    Header="Exit"/>
+
+            </MenuItem>
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Model">
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="NewModel"  InputGestureText="Ctrl+N"   Width="250" Cursor="Hand" ToolTip="Ctrl+N"   Header="New"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="OpenModel"   Width="250" InputGestureText="Ctrl+O"  Cursor="Hand" ToolTip="Ctrl+O"    Header="Open"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Name="ButtonOpenRecent" Click="OpenRecent"    Width="250" Cursor="Hand"     Header="Open Recent">
+                    <MenuItem Name="ButtonClearRecents" Header="Clear" Click="ClearRecents"/>
+                </MenuItem>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Name="ButtonOpenInFolder" Click="OpenInFolder"    Width="250" Cursor="Hand"     Header="Open in Explorer"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="SaveCurrentModel"   InputGestureText="Ctrl+S"    Width="250" Cursor="Hand"    ToolTip="(Ctrl+S) overwrite the current model with its changes" Header="Save"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="SaveasMDL" InputGestureText="Alt+S"    Width="250"  Cursor="Hand"    ToolTip="(Alt+S) Save the model to another location and memorize the location" Header="Save as..."></MenuItem>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="SaveBackup"   Width="250"  Cursor="Hand"     Header="Save a backup"></MenuItem>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="SaveCopy"   Width="250"  Cursor="Hand"    ToolTip=" Save a copy of the model and do not memorize the location" Header="Save a copy..."></MenuItem>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="ImportOBJ"   Width="250"  Cursor="Hand"    Header="Import OBJ as a geoset..."/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="ExportOBJ"   Width="250"  Cursor="Hand"    Header="Export as OBJ...."/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="TakeScreenshot"   Width="250"  Cursor="Hand"    Header="Take a screenshot"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="ClearHistory"    Width="250"  Cursor="Hand"    Header="Clear History"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="CloseModel"    Width="250"  Cursor="Hand"    Header="Close"/>
+
+            </MenuItem>
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Render">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Scene Grid size (0 for none): "/>
+                    <TextBox Name="Input_SceneGrid" Width="100" Padding="2" Margin="2"  TextChanged="SetSceneGrid"/>
+                </StackPanel>
+                <CheckBox Content="Axis" Name="AxisCheckBox" IsChecked="True" Margin="5"   Checked="AxisCheckBox_Checked" Unchecked="AxisCheckBox_Checked"/>
+                <CheckBox Content="Ground grid plane" IsChecked="True" Name="GridCheckBox"  Margin="5"  Checked="GridCheckBox_Checked" Unchecked="GridCheckBox_Checked"/>
+                <CheckBox Content="Grid plane YZ "  Name="GridCheckBoxYZ"  Margin="5"  Checked="GridCheckBox_CheckedYZ" Unchecked="GridCheckBox_CheckedYZ"/>
+                <CheckBox Content="Grid plane XZ "  Name="GridCheckBoxXZ"  Margin="5"  Checked="GridCheckBox_CheckedXZ" Unchecked="GridCheckBox_CheckedXZ"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Grid size:" Margin="5"/>
+                    <TextBox Name="Input_GridSize" Width="30" Margin="5" TextChanged="SetGridSize" Text="100"/>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Line spacing:" Margin="5"/>
+                    <TextBox Name="InputLineSpacing" Width="30" Margin="5" TextChanged="SetLineSpacing" Text="10"/>
+
+                </StackPanel>
+                <RadioButton Content="Textured" Name="TexturedCheckBox" Margin="5"  IsChecked="True"  Checked="TexturesCheckBox_Checked" Unchecked="TexturesCheckBox_Checked"/>
+                <RadioButton Content="Surface" Name="SurfaceCheckBox" Margin="5"    Checked="SurfaceCheckBox_Checked" Unchecked="SurfaceCheckBox_Checked"/>
+                <RadioButton Content="Wireframe" Name="WireframeCheckbox"  Margin="5"  Checked="WireframeChecked" Unchecked="WireframeChecked"/>
+                <RadioButton Content="Points" Name="PointsCheckbox"  Margin="5"   Checked="PointsChecked" Unchecked="PointsChecked"/>
+
+                <CheckBox Content="Triangles" Name="TrianglesCheckBox" Margin="5"   Checked="TrianglesCheckBox_Checked" Unchecked="TrianglesCheckBox_Checked" IsChecked="True"/>
+                <CheckBox Content="Edges" Name="EdgesCheckBox" Margin="5"   Checked="EdgesCheckBox_Checked" Unchecked="EdgesCheckBox_Checked"/>
+                <CheckBox Content="Vertices" Name="VerticesCheckBox" Margin="5"    Checked="VerticesCheckBox_Checked" Unchecked="VerticesCheckBox_Checked"/>
+                <CheckBox Content="Nodes" Name="NodesCheckBox"  Margin="5"   Checked="NodesCheckBox_Checked" Unchecked="NodesCheckBox_Checked"/>
+                <CheckBox Content="Collision Shapes" Margin="5"  Name="CshapeExtentsCheckBox"   Checked="colsChecked" Unchecked="colsChecked"/>
+                <CheckBox Content="Geoset Extents" Margin="5" Name="GeosetExtentsCheckBox"   Checked="GeosetExtentsChecked" Unchecked="GeosetExtentsChecked"/>
+                <CheckBox Content="Rigging" Name="RiggingCheckBox" Margin="5"  Checked="RiggingCheckBox_Checked" Unchecked="RiggingCheckBox_Checked"/>
+                <CheckBox Content="Shading" IsChecked="True" Name="ShadingCheckBox" Margin="5"   Checked="ShadingCheckBox_Checked" Unchecked="ShadingCheckBox_Checked"/>
+                <CheckBox Content="Lighting" IsChecked="True" Name="LightingCheckBox" Margin="5"   Checked="LightingCheckBox_Checked" Unchecked="LightingCheckBox_Checked"/>
+                <CheckBox Content="Normals" Name="NormalsCheckBox" Margin="5"    Checked="NormalsCheckBox_Checked" Unchecked="NormalsCheckBox_Checked"/>
+                <CheckBox Content="Skeleton" Name="SkeletonCheckBox" Margin="5"   Checked="Skeleton_Checked" Unchecked="Skeleton_Checked"/>
+
+
+            </MenuItem>
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Camera">
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Top" Click="SetCameraTop"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Bottom" Click="SetCameraBottom"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Front" Click="SetCameraFront"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Back" Click="SetCameraBack"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Left" Click="SetCameraLeft"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Right" Click="SetCameraRight"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Reset" Click="ResetCamera" InputGestureText="S" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Custom..." Click="SetCameraCustom"/>
+
+            </MenuItem>
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Selection">
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Select All" Click="SelectAll" InputGestureText="Ctrl+A"   Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Deselect All" Click="SelectNone"    InputGestureText="Space"   Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Invert Selection" Click="SelectInvert"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Select Adjascent" Click="Selectadj"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Next overlapping triangle" Click="SelectNextOverlappingTraingle"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Next overlapping vertex" Click="SelectNextOverlappingVertex"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Area"    Cursor="Hand" >
+                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All triangles with equal or greater area" Click="SelectAllBiggerTriangles"    Cursor="Hand" />
+                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All triangles with less area" Click="SelectAllSmallerTriangles"    Cursor="Hand" />
+                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All triangles with equal or greater area in its geoset" Click="SelectAllBiggerTriangles2"    Cursor="Hand" />
+                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All triangles with less area in its geoset" Click="SelectAllSmallerTriangles2"    Cursor="Hand" />
+                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All triangles with equal or greater area in different geoset" Click="SelectAllBiggerTriangles3"    Cursor="Hand" />
+                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All triangles with less area in different geoset" Click="SelectAllSmallerTriangles3"    Cursor="Hand" />
+
+                </MenuItem>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Grow" Click="GrowSelection"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Shrink" Click="ShrinkSelection"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Similar sizes" Click="SelectSimilarSizes"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Different sizes" Click="SelectDifferentSizes"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Similar Facing" Click="SelectSimilarFacing"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Different Facing" Click="SelectDifferentFacing"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Geosets using same material" Click="SelectaGeosetsWithSimilarMaterial"     Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray" Header="Select all in sight"  Click="SelectSight" Visibility="Collapsed"/>
+                <!-- unfinished -->
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"      >
+                    <MenuItem.Header>
+                        <CheckBox Name="Check_LockSelection"  Cursor="Hand" >Lock</CheckBox>
+                    </MenuItem.Header>
+
+
+                </MenuItem>
+
+
+            </MenuItem>
+
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Components">
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Texture Manager" Click="ManageTextures"    Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Texture Animations Manager" Click="ManageTextureAnims"     Cursor="Hand" />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"   Header="Geoset Animations Manager" Click="EditGeosetAnimation"    Cursor="Hand"  />
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Materials Manager" Click="ManageMaterials"     Cursor="Hand"  />
+
+            </MenuItem>
+
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Create" Name="mItem_CreateShape">
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Cube" Click="CreateCube"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Cyllinder" Click="CreateCyl"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Cone" Click="CreateCone"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Sphere" Click="CreateSphere"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Plane" Click="CreatePlane"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Billboarded Plane For Texture..." Click="CreatePlaneTexture"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Particle" IsEnabled="False" >
+                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="_" />
+
+                </MenuItem>
+                <Separator Background="LightGray" BorderBrush="LightGray"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Team Color Plane" Click="CreateTCBG"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Hero Glow" Click="CreateHEROAURA"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Draw..." Click="Draw3DShape"/>
+            </MenuItem>
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Center" Name="mItem_Center"   >
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="By X Together" Click="CenterXT"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="By Y Together" Click="CenterYT"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="By Z Together" Click="CenterZT"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="By XYZ Together" Click="CenterXYZT"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="By X Each" Click="CenterXE"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="By Y Each" Click="CenterYE"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="By Z Each" Click="CenterZE"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Put on Ground" Click="PutOnGround"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Adjust model position by..." Click="AdjustAll_"/>
+            </MenuItem>
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Align" Name="mItem_Align"   >
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="By X " Click="AlignX"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="By Y " Click="AlignY"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="By Z " Click="AlignZ"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Set Distance..." Click="AlignDistance"/>
+
+            </MenuItem>
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Tools"    >
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Quick Clean" Click="QuickClean"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Import Animations" Click="ImportAnimations"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="MDlX Converter" Click="MDLX_call"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Pathing Texture Maker" Click="call_PTM"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Loading Screen Maker" Click="call_LSC"/>
+
+            </MenuItem>
+            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Optimizer">
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="CallOptimizer" Header="Optimize"/>
+                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Click="CallErrorChecker" Header="Error Checker"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Getting Started" Click="ExplainApp" Background="LightGray" BorderBrush="LightGray"/>
+                <MenuItem Header="Hotkeys" Click="HotkeysInfo" Background="LightGray" BorderBrush="LightGray"/>
+                <MenuItem Header="How does a warcraft III Model work?" Click="Explain" Background="LightGray" BorderBrush="LightGray"/>
+                <MenuItem Header="Report" Click="DoReport" Background="LightGray" BorderBrush="LightGray"/>
+                 
+            </MenuItem>
+            <MenuItem Name="Icon_Mouse1" BorderThickness="2" BorderBrush="Lime" Height="20" Width="20" Margin="50,0,0,0">
+                <MenuItem.Background>
+                    <ImageBrush ImageSource="/Images/cols.png"/>
+                </MenuItem.Background>
+            </MenuItem>
+            <MenuItem Name="Icon_Mouse2" BorderThickness="2" BorderBrush="Gray" Height="20" Width="20">
+                <MenuItem.Background>
+                    <ImageBrush ImageSource="/select_add.png"/>
+                </MenuItem.Background>
+            </MenuItem>
+            <MenuItem  Name="Icon_Mouse3" BorderThickness="2" BorderBrush="Gray" Height="20" Width="20">
+                <MenuItem.Background>
+                    <ImageBrush ImageSource="/select_remove.png"/>
+                </MenuItem.Background>
+            </MenuItem>
+
+        </Menu>
+        <ScrollViewer Name="SidePanel" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" VerticalScrollBarVisibility="Visible" VerticalAlignment="Top">
+            <StackPanel Height="1500" >
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Button Name="ButtonUndo" Width="100" Cursor="Hand" Click="undo" ToolTip="Ctrl+Z" Background="#FF404040" Foreground="White" >
+                            <StackPanel Orientation="Horizontal" Name="Panel_UndoRedo">
+                                <Image Source="Images/do_undo.png" Stretch="None" Width="30" Height="30"/>
+                                <TextBlock Name="ButtonUndoText" VerticalAlignment="Center" Text="Undo" Margin="10,0,0,0" />
+
+                            </StackPanel>
+                        </Button>
+                        <Button Name="ButtonRedo" Width="100" Cursor="Hand" Click="redo"  ToolTip="Ctrl+Y" Background="#FF404040" Foreground="White" >
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Name="ButtonRedoText" VerticalAlignment="Center" Text="Redo" Margin="0,0,10,0"/>
+                                <Image Source="Images/do_redo.png" Stretch="None" Width="30" Height="30"/>
+                            </StackPanel>
+                        </Button>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock   Foreground="White"  Text="Name" Width="50"/>
+                        <TextBox Width="90" Name="InputModelName"></TextBox>
+                        <Button Name="ButtonInfo" Padding="2" Margin="5,0,0,0" Width="45" Click="ShowInfo" Background="#FF404040" Foreground="White" >Info</Button>
+                    </StackPanel>
+                    <TextBlock Text="Edit Mode"   Foreground="White"  TextDecorations="Underline"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Name="Button_Geometry" BorderThickness="1" BorderBrush="#FF404040" 
+                           Foreground="White" Background="#FF404040" FontSize="14"   
+                           VerticalAlignment="Center"  Width="50" Height="30"   >
+
+                        </Label>
+                        <Button  Cursor="Hand"  Height="30" Width="30" BorderThickness="2" Name="Button_Vertices"   Click="SetModeVertices" 
+                              ToolTip="Vertices editing mode (V)">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Images/vertex.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button  Cursor="Hand" Height="30" Width="30"  Name="Button_Edge" BorderThickness="2"  Click="SetModeEdges"   ToolTip="Edges editing mode (E)">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Images/edge.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button  Cursor="Hand" Height="30" Width="30"  BorderThickness="2"  Name="Button_Triangles" Click="SetModeTriangles"   ToolTip="Triangles editing mode (T)">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Images/triangle.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button  Cursor="Hand" Height="30" Width="30"  BorderThickness="2"  Name="Button_Geosets" Click="SetModeGeosets"  ToolTip="Geosets editing mode (G)">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Images/cube.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button  Cursor="Hand" Height="30" Width="30"  BorderThickness="2"  Name="Button_Sculpt" Click="SetModeSculpt"  ToolTip="Sculpting mode (P)&#xA;Push and pull triangles in thier facing direction with left/right mouse click, without having to select them&#xA;A triangle's facing direction is detemined by the normals' direction of its vertices">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Images/sculpt.png"/>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+
+                    <Button Height="30" Click="SetModeNormals" ToolTip="L" Name="Button_Normals" Background="#FF404040" Foreground="White" Cursor="Hand" BorderThickness="2">Normals</Button>
+                    <Button Height="30" Click="SetModeNodes" ToolTip="N" Name="Button_Bones" Cursor="Hand" BorderThickness="2" Background="#FF404040" Foreground="White"  >Nodes</Button>
+                    <Button Height="30" Click="SetModeUV" ToolTip="U" Name="Button_UV" Cursor="Hand" BorderThickness="2" Background="#FF404040" Foreground="White" >UV Mapper</Button>
+                    <Button Height="30" Click="SetModeRigging" ToolTip="I" Name="Button_Rigging" Cursor="Hand" BorderThickness="2" Background="#FF404040" Foreground="White" >Rigging</Button>
+                    <Button Height="30" Click="SetModeAnimator" ToolTip="A" Name="Button_Animator" Cursor="Hand" BorderThickness="2" Background="#FF404040" Foreground="White" >Animator</Button>
+                    <TextBlock Name="LabelNodes" Text="Nodes:" TextDecorations="Underline" Foreground="White"/>
+                    <TreeView Name="List_Nodes"  SelectedItemChanged="SelectedNode" MouseDoubleClick="OpenNodeProperies" Background="#FFA9C5C5" Height="200" 
+                              Visibility="Collapsed" PreviewMouseRightButtonDown="TreeView_PreviewMouseRightButtonDown">
+                        <TreeView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="New">
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="New Bone" Click="NewBone"  Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="New Helper" Click="NewHelper" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="New Attachment" Click="NewAttachment" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="New Collision Shape" Click="NewCols" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="New Light" Click="NewLight" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="New Emitter1" Click="NewEmitter1" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="New Emitter2" Click="NewEmitter2" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="New Ribbon Emitter" Click="NewRibbon" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="New Event Object" Click="NewEvent" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Other"  Cursor="Hand">
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray" IsEnabled="False" Header="Create Skeleton" Click="CreateSkeleton"  Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Create Building attachment points" Click="CreateBuildingAttachmentPoints"  Cursor="Hand"/>
+                                    </MenuItem>
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Edit Node Properties" Click="Edittrs" Cursor="Hand"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Edit data" Click="EditNode_Data" Cursor="Hand"/>
+
+
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Duplicate" Click="DuplicateNode" Cursor="Hand"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Delete" Click="DeleteNode" Cursor="Hand"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Move">
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Move to Root" Click="MoveBoneToRoot" Cursor="Hand"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Move under another node..." Click="MoveBone" Cursor="Hand"/>
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Reattach vertices to another bone..." Click="ReattachVertices" Cursor="Hand"/>
+                                
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Attach info" Click="GetaTtachInfo" Cursor="Hand"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Center">
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Center at geoset..." Click="CenterNodeAtGeoset" Cursor="Hand"/>
+                               
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Center at selection..." Click="CenterNodeAtSelection" Cursor="Hand"/>
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Select">
+
+                                   
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Select in viewport" Click="SelectNodeInViewport" Cursor="Hand"/>
+
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Select all vertices attached to this bone" Click="SelectVerticesAttachedToBone" Cursor="Hand"/>
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Transformations">
+
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Copy" Click="CopyNodeTransformations" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Paste"   Cursor="Hand">
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Translation" Click="PasteNodeTranslation" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Rotation" Click="PasteNodeRotations" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Scaling" Click="PasteNodeScaling" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All" Click="PasteNodeAll" Cursor="Hand"/>
+
+                                    </MenuItem>
+                                </MenuItem>
+                                   
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Pivot Points"   Cursor="Hand">
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Copy Pivot Point" Click="CopyPivotPoint" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Paste Pivot Point" Click="PastePivotPoint" Cursor="Hand"/>
+
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Null Pivot Point" Click="NullPivotPoint" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Negate Pivot Point" Cursor="Hand">
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="X" Click="NegateNodePPX" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Y" Click="NegateNodePPY" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Z" Click="NegateNodePPZ" Cursor="Hand"/>
+                                    </MenuItem>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Null All Pivot Points" Click="NullPivotPoints" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Duplciate pivot point to all children" Click="DuplicaetePivotPointToFirstChildren" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Duplciate pivot point to all children and subchildren" Click="DuplicaetePivotPointToAllChildren" Cursor="Hand"/>
+
+
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Other"   Cursor="Hand">
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Merge bones" Click="MergeBones" Cursor="Hand" ToolTip="Attaches every isolated triangle attached to this bone to a new bone"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Split by triangles" Click="SplitBoneByTriangles" Cursor="Hand" ToolTip="Attaches every isolated triangle attached to this bone to a new bone"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Alphabetize" Click="AlphabetizeAllNodes" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Alphabetize Children" Click="AlphabetizeAllChildren" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Simple animations..."  Cursor="Hand" IsEnabled="False">
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Float" Click="SimpleFloat" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Rotate" Click="SimpleRotate" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Pulsate" Click="SimplePulsate" Cursor="Hand"/>
+
+                                    </MenuItem>
+                                </MenuItem>
+                            </ContextMenu>
+                        </TreeView.ContextMenu>
+                    </TreeView>
+                    <TextBlock Name="Label_Geosets" Text="Geosets:" TextDecorations="Underline" Foreground="White"/>
+                    <ListBox Name="List_Geosets" Background="WhiteSmoke" Height="200" Visibility="Collapsed"
+                             SelectionMode="Multiple" PreviewMouseRightButtonDown="SelectUnselectedItem" KeyDown="KeyOnListGeosets">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Check all" Click="UnhideAllGeosets" Cursor="Hand"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Uncheck all" Click="HideAllGeosets" Cursor="Hand"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Invert all" Click="InvertGeosetsCheck" Cursor="Hand"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Select in viewport" Click="SelectGeosetsInViewport"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Select">
+                                    <MenuItem Name="ButtonSelectNextVertex" Background="LightGray"   BorderBrush="LightGray"  Header="Next Vertex" Click="S_Next_G_V" Cursor="Hand"/>
+                                    <MenuItem Name="ButtonSelectPrevVertex" Background="LightGray"   BorderBrush="LightGray"  Header="Previous Vertex" Click="S_Prev_G_V" Cursor="Hand"/>
+                                    <MenuItem Name="ButtonSelectNextTriangle" Background="LightGray"   BorderBrush="LightGray"  Header="Next triangle" Click="S_Next_G_T" Cursor="Hand"/>
+                                    <MenuItem Name="ButtonSelectPrevTriangle" Background="LightGray"   BorderBrush="LightGray"  Header="Previous triangle" Click="S_Prev_G_T" Cursor="Hand"/>
+                                    <MenuItem Name="ButtonSelectNextEdge" Background="LightGray"   BorderBrush="LightGray"  Header="Next edge" Click="S_Next_G_E" Cursor="Hand"/>
+                                    <MenuItem Name="ButtonSelectPrevEdge" Background="LightGray"   BorderBrush="LightGray"  Header="Previous edge" Click="S_Prev_G_E" Cursor="Hand"/>
+
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Name="Item_GeosetTextureSet" Header="Set Material..."   Cursor="Hand"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Name="Item_EditGeoset" Header="Edit"   Cursor="Hand" Click="EditGeosetProperties"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Visibilities"   >
+
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Name="Item_Visibilities" Header="Edit Visibilities"   Cursor="Hand" Click="EditGeosetVisibilities"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Name="Item_Visibilities_CreateAll" Header="Create missing visibilities for all geoset animations"   Cursor="Hand" Click="C045_23"/>
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Copy Centroid" Click="CopyCentroid"/>
+                               
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Align" >
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by X"  Click="AlignGEosetsByX"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by Y"  Click="AlignGEosetsByY"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by Z"  Click="AlignGeosetsByZ"/>
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Attachment" >
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Attach selected geoset/s to..." Click="AttachAllSelectedGeosetsTo"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Attach info" Click="CallAttachInfoGeosets"/>
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Merge">
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Merge Selected" Click="Merge" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Merge all that use the same material" Click="MergeSimilar" Cursor="Hand"/>
+                                </MenuItem>
+
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Misc">
+                                   
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Equalize in scale" Click="EqualizeGeosets" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Create collision shape for selected geoset/s" Click="CreateColShapeForGeoset" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Remove all geosets" Click="RemoveAllGeosets" Cursor="Hand"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Organize"  Cursor="Hand">
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by vertices count ascending" Click="OrderGeosetsByV_A" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by vertices count descending" Click="OrderGeosetsByV_D" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by triangles count ascending" Click="OrderGeosetsByT_A" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by triangles count descending" Click="OrderGeosetsByT_D" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by id ascending" Click="OrderGeosetsByid_A" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by id descending" Click="OrderGeosetsByid_D" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by material id descending" Click="OrderGeosetsBymid_A" Cursor="Hand"/>
+                                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by materialid descending" Click="OrderGeosetsBymid_D" Cursor="Hand"/>
+
+                                    </MenuItem>
+
+                                </MenuItem>
+                                <MenuItem Header="Boolean Commads" Background="LightGray" IsEnabled="False">
+                                    <MenuItem Header="Combine" Click="BooleanCombine" Background="LightGray" BorderBrush="LightGray"/>
+                                    <MenuItem Header="Subtract - First" Click="BooleanSubtract1" Background="LightGray" BorderBrush="LightGray"/>
+                                    <MenuItem Header="Subtract - Second" Click="BooleanSubtract2" Background="LightGray" BorderBrush="LightGray"/>
+                                    <MenuItem Header="Add (Intersect)" Click="BooleanAdd" Background="LightGray" BorderBrush="LightGray"/>
+                                    <MenuItem Header="Exclude (Symmetric Difference)" Click="BooleanExclude" Background="LightGray" BorderBrush="LightGray"/>
+                                    <MenuItem Header="Slice (Cut)" Click="BooleanSlice" Background="LightGray" BorderBrush="LightGray"/>
+                                </MenuItem>
+                                <MenuItem Header="Export/Import" Background="LightGray">
+                                    <MenuItem Header="Export" Click="ExportGeoset" Background="LightGray" BorderBrush="LightGray"/>
+                                    <MenuItem Header="Import" Click="ImportGeoset" Background="LightGray" BorderBrush="LightGray"/>
+                                    <MenuItem Header="Export to new model" Click="SaveGEosetsAsNewModel" Background="LightGray" BorderBrush="LightGray"/>
+                                    <MenuItem Header="Import from model" Click="LoadGeosetsFromModel" Background="LightGray" BorderBrush="LightGray"/>
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Pan To" Click="PanToGeoset" Cursor="Hand"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Delete" Click="DelGeoset" Cursor="Hand"/>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                    </ListBox>
+                    <StackPanel Name="Panel_Rigging" Visibility="Collapsed">
+                        <TextBlock Text="Available Bones:" TextDecorations="Underline" Margin="5,0,0,0" Foreground="White" />
+                        <ListBox Name="List_Rigging_Bones"  Background="WhiteSmoke"  Height="80" SelectionMode="Single" SelectionChanged="SelectedBoneInRigging"/>
+
+                        <TextBlock Text="Selected vertices are attached to:" TextDecorations="Underline" Margin="5,0,0,0" Foreground="White" />
+                        <Label Name="Riggin_Multiple"  >
+                            <StackPanel Orientation="Horizontal" Name="Label_Various" Visibility="Hidden">
+                                <StackPanel Name="Icon_RiggingBad" Orientation="Horizontal">
+                                    <Image Width="16" Height="16" Source="images/x.png"/>
+                                    <TextBlock Text="Various" Margin="5,0,0,0" Foreground="White" />
+                                </StackPanel>
+                                <StackPanel Name="Icon_RiggingOK" Orientation="Horizontal" Visibility="Hidden">
+                                    <Image Width="16" Height="16" Source="images/tick.png"/>
+                                    <TextBlock Text="Same" Margin="5,0,0,0" Foreground="White" />
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Label>
+                        <ListBox  Name="List_Rigging_AttachedTo" Foreground="White" Height="100" Visibility="Visible" SelectionMode="Single" 
+PreviewMouseRightButtonDown="SelectUnselectedItem"/>
+                        <StackPanel  Name="RiggingButtons">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="Button_Detach" Content="Detach" Width="42" Cursor="Hand" Click="DetachBones" Background="#FF404040" Foreground="White"/>
+                                <Button Name="Button_ClearAttach" Content="Clear and Attach" Width="94" Cursor="Hand" Click="ClearAndAttachBones"  Background="#FF404040" Foreground="White" />
+                                <Button Name="Button_AddAttach" Content="Add-Attach" Width="66" Cursor="Hand" Background="#FF404040" Foreground="White" Click="AddAttachBone"/>
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="Button_riggingCopy" Content="Copy" Width="42" Cursor="Hand" Background="#FF404040" Foreground="White" Click="CopyRigging"/>
+                                <Button Name="Button_RiggingPaste1" Content="Clear and Paste" Width="94" Cursor="Hand" Background="#FF404040" Foreground="White" Click="ClearPasteRigging"/>
+                                <Button Name="Button_RiggingPaste2" Content="Add-Paste" Width="66" Cursor="Hand" Background="#FF404040" Foreground="White" Click="AddPasteRigging"/>
+
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+                    <Expander Header="Selection" Foreground="White">
+                        <StackPanel>
+                            <TextBlock Name="Data_SelVertices" Text="Vertices: 0"/>
+                            <TextBlock Name="Data_SelTriangles" Text="Triangles: 0"/>
+                            <TextBlock Name="Data_SelEdges" Text="Edges: 0"/>
+                            <TextBlock Name="Data_SelCentroid" Text="Centroid: 0"/>
+                        </StackPanel>
+                    </Expander>
+                    <StackPanel Name="Manual" IsEnabled="True">
+                        <Expander Header="Manual Transform" Foreground="White">
+                            <StackPanel>
+                                <Expander Header="Translate" x:Name="Expander_Translation" Foreground="White">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Width="140" HorizontalAlignment="Left">
+                                            <Button Content="copy" Click="CopyTranslations" Cursor="Hand" Padding="5,0,5,0" />
+                                            <Button Content="Paste" Click="PasteTranskations" Cursor="Hand" Padding="5,0,5,0" />
+                                            <Button Content="Refresh" Click="RefreshManualTranslation" Cursor="Hand" Padding="5,0,5,0" Width="55"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="White" Text="X" Width="30" FontSize="20" TextAlignment="Center"/>
+                                            <TextBox Name="inputX" Width="170" Height="30" FontSize="16"  ToolTip="Enter" KeyDown="SetX"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock  Foreground="White" Text="Y" Width="30" FontSize="20" TextAlignment="Center"/>
+                                            <TextBox Name="inputY" Width="170" Height="30" FontSize="16" ToolTip="Enter" KeyDown="SetY"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock  Foreground="White" Text="Z" Width="30" FontSize="20" TextAlignment="Center"/>
+                                            <TextBox Name="inputZ" Width="170" Height="30" FontSize="16"  ToolTip="Enter"  KeyDown="SetZ"/>
+                                        </StackPanel>
+                                        <Button  Click="SetXYZ"   Foreground="White"  Cursor="Hand" Background="#FF404040" >Set All</Button>
+                                    </StackPanel>
+                                </Expander>
+                                <Expander Header="Rotate" Name="Expander_Rotation" Foreground="White">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Width="100" HorizontalAlignment="Left">
+                                            <Button Content="copy" Click="CopyRotations" Cursor="Hand" Padding="5,0,5,0"/>
+                                            <Button Content="Paste" Click="PasteRotations" Cursor="Hand" Padding="5,0,5,0"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="White" Text="X" Width="30" FontSize="20" TextAlignment="Center"/>
+                                            <TextBox Name="inputXr" Width="170" Height="30" FontSize="16"  ToolTip="Enter" KeyDown="SetXr"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock  Foreground="White" Text="Y" Width="30" FontSize="20" TextAlignment="Center"/>
+                                            <TextBox Name="inputYr" Width="170" Height="30" FontSize="16" ToolTip="Enter" KeyDown="SetYr"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock  Foreground="White" Text="Z" Width="30" FontSize="20" TextAlignment="Center"/>
+                                            <TextBox Name="inputZr" Width="170" Height="30" FontSize="16"  ToolTip="Enter"  KeyDown="SetZr"/>
+                                        </StackPanel>
+                                        <Button  Click="SetXYZr"   Foreground="White"  Cursor="Hand" Background="#FF404040" >Set All</Button>
+                                        <TextBlock Text="Angle in:" Foreground="White"/>
+                                        <RadioButton Name="Radio_Degrees" Content="Degrees" Foreground="White" IsChecked="True"/>
+                                        <RadioButton Name="Radio_Radians" Content="Radian" Foreground="White"/>
+                                    </StackPanel>
+
+                                </Expander>
+                                <Expander Header="Scale" Foreground="White" Name="Expander_Scaling">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Width="100" HorizontalAlignment="Left">
+                                            <Button Content="copy" Click="copyScalings" Cursor="Hand" Padding="5,0,5,0"/>
+                                            <Button Content="Paste" Click="pasteScalings" Cursor="Hand" Padding="5,0,5,0"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="White" Text="X" Width="30" FontSize="20" TextAlignment="Center"/>
+                                            <TextBox Name="InputXs" Width="170" Height="30" FontSize="16"  ToolTip="Enter" KeyDown="SetXs"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock  Foreground="White" Text="Y" Width="30" FontSize="20" TextAlignment="Center"/>
+                                            <TextBox Name="InputYs" Width="170" Height="30" FontSize="16" ToolTip="Enter" KeyDown="SetYs"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock  Foreground="White" Text="Z" Width="30" FontSize="20" TextAlignment="Center"/>
+                                            <TextBox Name="InputZs" Width="170" Height="30" FontSize="16"  ToolTip="Enter"  KeyDown="SetZs"/>
+                                        </StackPanel>
+                                        <Button  Click="SetXYZs"   Foreground="White"  Cursor="Hand" Background="#FF404040" >Set All</Button>
+                                    </StackPanel>
+
+
+                                </Expander>
+                                <TextBlock Text="Rotate/Scale relative to:" Foreground="White"/>
+                                <RadioButton Content="Centroid" Name="Radio_Centroid" Checked="EnableDisableCustomPP"   Unchecked="EnableDisableCustomPP" Foreground="White"/>
+                                <RadioButton Content="Custom pivot point:" Name="Radio_Custom" Foreground="White"/>
+                                <StackPanel Name="Panel_CustomPP">
+
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Foreground="White" Text="X" Width="30" FontSize="20" TextAlignment="Center"/>
+                                        <TextBox Name="InputCustomX" Width="170" Height="30" FontSize="16"  ToolTip="Enter" KeyDown="SetXs"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock  Foreground="White" Text="Y" Width="30" FontSize="20" TextAlignment="Center"/>
+                                        <TextBox Name="InputCustomY" Width="170" Height="30" FontSize="16" ToolTip="Enter" KeyDown="SetYs"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock  Foreground="White" Text="Z" Width="30" FontSize="20" TextAlignment="Center"/>
+                                        <TextBox Name="InputCustomZ" Width="170" Height="30" FontSize="16"  ToolTip="Enter"  KeyDown="SetZs"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Expander>
+
+
+
+
+                    </StackPanel>
+
+                </StackPanel>
+                <StackPanel Name="Field_ModifyAmount">
+                    <TextBlock Text="Modify Amount:" Foreground="White" ToolTip="The increment with which a non-instant command transforms or modifies the selected geometry per mouse move."/>
+                    <TextBox Width="100" Text="1" Name="InputModifyAmount" TextChanged="ModifiedModifyAmount"/>
+                </StackPanel>
+                <StackPanel Name="Field_WorldMatrix">
+                    <TextBlock Text="Snapping grid spacing:" Foreground="White" ToolTip="Snapping grid spacing refers to an invisible, infinite matrix in 3D space that allows geometry to be aligned and positioned precisely. This grid operates based on a predefined spacing distance, to which objects can be snapped upon command."/>
+                    <TextBox Width="100" Text="1" Name="InputSnapSystem" TextChanged="ModifySnappungGrid"/>
+                </StackPanel>
+                <Expander Header="Cameras in model" Foreground="White" >
+                    <StackPanel>
+                        <TextBlock Text="Cameras in model" TextDecorations="Underline" Foreground="White" Margin="5"/>
+                        <ListBox Name="CameraList" Height="60" SelectionMode="Single"  />
+                        <Button Click="CreateCamFromView" Padding="5" Foreground="White" Background="#FF404040" Cursor="Hand">Create from View</Button>
+                        <Button Click="ViewCamera" Padding="5" Foreground="White" Background="#FF404040" Cursor="Hand">View</Button>
+                        <Button Click="DelCam" Padding="5" Foreground="White" Background="#FF404040" Cursor="Hand">Delete</Button>
+                    </StackPanel>
+                </Expander>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+        <Grid Name="Scene_Frame"  Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"   >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="383*" />
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="197*"/>
+
+            </Grid.ColumnDefinitions>
+            <sharpGL1:OpenGLControl     Name="Scene_Viewport"    OpenGLDraw="DrawScene" Grid.ColumnSpan="3"   />
+            <Canvas Name="Scene_Canvas_" 
+        MouseWheel="Scene_Zoom" 
+        MouseDown="Scene_MouseDown"
+        MouseUp="Scene_MouseUp"
+        MouseMove="Scene_MouseMove"
+        Background="Transparent"  
+        
+        VerticalAlignment="Center" Grid.ColumnSpan="3" 
+        >
+                <Canvas.ContextMenu>
+                    <ContextMenu>
+
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Translate" Name="mItem_Translate" Click="SetTranslateMode"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Rotate" Name="mItem_Rotate" Click="SetRotateMode"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Scale" Name="mItem_Scale" Click="SetScaleMode"/>
+
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Scale to fit..." Name="mItem_Scalefit" Click="ScaleToFit"/>
+
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Extrude" Name="mItem_ExtrudeTog" Click="SetScaleExtrudeTogether"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Extrude Each" Name="mItem_ExtrudeEach" Click="SetExtrudeEachMode"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Extend"  ToolTip="Pulls triangles in their facing direction"  Name="mItem_Extend" Click="SetExtend"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Extract" Name="mItem_Extract" Click="SetExtract" ToolTip="Duplicated the selection and moves it">
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Extract" Click="SetExtract"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Extract Each"   Click="SetExtractEach"/>
+
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Extract as new Geoset" Click="SetExtractNAsewGEoset"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Extract Each as new geoset"  Click="SetExtractEachAsNewGEoset"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Extract and assign to another geoset..."  Click="ExtractAssignToAG"/>
+
+                        </MenuItem>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Expand/Shrink" Name="mItem_ExpandShrink" Click="SetExpandShrink" ToolTip="if two edges or faces are selected, pushes them toward each other or away from each other
+"/>
+
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Detach" Name="mItem_Detach" >
+
+
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Detach"  Click="Detach" />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Detach As new Geoset" Click="DetachAsNewGeoset" />
+
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Detach each"   Click="DetachEach" />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Detach each As new Geoset"   Click="DetachEachAsNewGeoset" />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Assign to geoset..."   Click="AssignToGeoset" />
+
+                        </MenuItem>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Widen/Narrow" Name="mItem_Widen" Click="SetWiden"/>
+
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Inset (Connected)" Name="mItem_Inset" Click="SetInset"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Inset (Isolated)" Name="mItem_Inset2" Click="SetInset"/>
+
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Snap" Name="mItem_Snap"  >
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="to X+" Click="SnapXp"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="to Y+" Click="SnapYp"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="to Z+" Click="SnapZp"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="to X-" Click="SnapXn"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="to Y-" Click="SnapYn"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="to Z-" Click="SnapZn"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="to nearest" Click="SnapToNearest"/>
+
+                        </MenuItem>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Flatten" Name="mItem_Flatten" ToolTip="Aligns selected vertices to a single axis, making their positioning flat" >
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by X" Click="SetFlattenX"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by Y" Click="SetFlattenY"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="by Z" Click="SetFlattenZ"/>
+
+                        </MenuItem>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Bevel" Name="mItem_Bevel" Click="SetBevel"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Connect/Bridge" Name="mItem_Connect" Click="Connect"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Mirror" ToolTip="Creates a connected mirrored geometry from seelcted flat surface" Name="mItem_Mirror" Click="Mirror"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Average" Name="mItem_RecalcNormals" Click="AverageNormals"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Negate" Name="mItem_FlipNormals" Click="NegateNormals"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Rotate" Name="mItem_RotateNormals" Click="SetRotateNormals"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Nullify" Name="mItem_NullifyNormals" Click="NullNormals"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Cut" Name="mItem_Cut" ToolTip="Creates dangling vertices along the selected edge/s, with equal distance inbetween. You must create triangles with them manually." >
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="in 2" Click="Cut2"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="in 3" Click="Cut3"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="in 4" Click="Cut4"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="in 5" Click="Cut5"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="in 6" Click="Cut10"/>
+                        </MenuItem>
+
+
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Curve" Visibility="Collapsed" Name="mItem_Curve" Click="SetCurve"  ToolTip="Sudivides and bends a selected quad in its facing direction" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Negate" Name="mItem_Negate"   ToolTip="Turns positive coordinates to negative and negative to positive" >
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="X" Name="mItem_NegateX" Click="NegateX"  />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Y" Name="mItem_NegateY" Click="NegateY"  />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Z" Name="mItem_NegateZ" Click="NegateZ"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All" Name="mItem_NegateAll" Click="Negate"   />
+
+                        </MenuItem>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Aim at..." Name="mItem_Aim" Click="AimAtTriange" ToolTip="Aims the selected geometry at a given coordinate" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Merge Edges" Name="mItem_MergeEdges" Click="MergeEdges" ToolTip="Merge two selected edges at their joint vertex"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Create Triangle" ToolTip="Creates a triangle from 3 selected vertices if they belong to the same geoset and not form a triangle already, or create 2 triangles from 4 selected vertices" Name="mItem_CreateTriangle" Click="CreateTriangle"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray" IsEnabled="False"  Header="Draw in triangle..." Name="mItem_drawinTriangle" Click="DrawInTriangle"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Subdivide" Name="mItem_Subdivide" Click="Subdivide" ToolTip="Subdivides each triangle into 3 triangles"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Simplify" Name="mItem_Simplify" Click="Simplify" ToolTip="Reduced the triangles in a selected un-interrupted flat surface to the minimum"/>
+
+
+
+
+
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Weld" ToolTip="Merges two selected connected vertices and preserves triangles" Name="mItem_Weld" Click="Weld" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Split" ToolTip="Splits a single selected vertices into multiple vertices assigning them to the triangles that use the vertex. If the vertex belong to 1 or no triangles, it will not be split." Name="mItem_Split" Click="SplitVertex" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Arrange" ToolTip="Arrange 3 or more selected vertices into a uniform geometric shape with specified rotation and alignment." Name="mItem_Arrange" Click="ArrangeVertices" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Duplicate along axis"  Name="mItem_DuplAA" Click="DuplicateAlongAxis" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Spread vertices"  Name="mItem_Spread" Click="SpreadVertices" ToolTip="IF two or more vertices are overlapping and it's hard to select a particular one, you can spread them by setting a certain distance between them" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Copy Position"   Name="mItem_CopyPos" Click="CopyPosition" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Paste Position"   Name="mItem_PastePos" Click="PastePosition" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Copy Facing Angle"   Name="mItem_Copyfa" Click="CopyFacingAngle" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Paste Facing Angle"   Name="mItem_Pastefa" Click="PasteFacingAngle" />
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="UV"   Name="mItem_UV"   >
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Copy UV"   Name="mItem_Copyuv" Click="CopyUV" />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Paste UV"   Name="mItem_Pasteuv" Click="PasteUV" />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Fit UV"   Name="mItem_FitUV" Click="FitUV"  ToolTip="If two Connected triangles that form a quad are seelcted, you can stretc the uv coordiantes to use the whole texture"/>
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Negate Us"   Name="mItem_Negateuvx" Click="FlipUs"  />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Negate Vs"   Name="mItem_Negateuvy" Click="FlipVs" />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Swap Us and Vs"   Name="mItem_swapuvs" Click="SwapUsandVs"  />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Center"   Name="mItem_centeruv" Click="CenterUV"  />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Rotate by 90C"   Name="mItem_RotateUV90" Click="RotateUV90" />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Rotate by -90C"   Name="mItem_RotateUV90m" Click="RotateUV90m" />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Swap two"   Name="mItem_SwapTwo" Click="SWapTwoSElectedVerticesUV" />
+                            <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Clamp selected to be between 0 and 1"   Name="mItem_ClampUVD" Click="ClampUVsTo_0_1" />
+
+
+                        </MenuItem>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Floor Vertices"   Name="mItem_FloorVertices" Click="FloorVertices" ToolTip="Rounds the selected vertices' coordinates. Example: 1.1323 become 1"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Ceiling Vertices"   Name="mItem_CeilingVertices" Click="CeilingVertices" ToolTip="Rounds the selected vertices' coordinates. Example: 1.1323 become 2" />
+
+
+
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Collapse" Name="mItem_Collapse" Click="Collapse" ToolTip="reduces all selected geometry to a single vertex and destroys triangles"/>
+                        <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Delete" Name="mItem_Del"  Click="DeleteSelectionInScene"   />
+
+                    </ContextMenu>
+                </Canvas.ContextMenu>
+            </Canvas>
+        </Grid>
+
+
+
+
+
+
+        <Grid Name="UVEditor" Visibility="Visible" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+              
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="195"/>
+                <RowDefinition Height="30"/>
+                <!-- Single row for layout -->
+            </Grid.RowDefinitions>
+ 
+                <!-- Texture Layer -->
+                <ScrollViewer Name="UVCanvas_ScrollViewer" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
+                    <Image Name="UVCanvas_Texture" />
+                </ScrollViewer>
+                
+                <!-- Grid Layer (Transparent Overlay for UV grid lines) -->
+                <Canvas Name="UVCanvas_Grid" Background="Transparent" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
+                    <!-- UV grid lines will be drawn here -->
+                </Canvas>
+
+                <!-- Drawing Layer (Vertices and Lines) -->
+                <Canvas Name="UVCanvas_Overlay" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Grid.Row="0" Grid.Column="0">
+                    <!-- Vertices and edges will be drawn here -->
+                </Canvas>
+
+                <!-- Selection Rectangle (For interactive selection) -->
+                <Rectangle Name="UVCanvas_SelectionRect"
+               Stroke="Red" StrokeThickness="1" Fill="Transparent"
+               Visibility="Collapsed" />
+          
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" Background="LightGray" >
+                <StackPanel Orientation="Horizontal" Margin="5">
+                <Button Name="Button_Move" Click="SetModeMove" Width="20" Height="20" Cursor="Hand" ToolTip=" Move Mode (M)" BorderThickness="2">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/move.png"/>
+                    </Button.Background>
+                </Button>
+                <Button Name="Button_Rotate" Click="SetModeRotate" Width="20" Height="20" Cursor="Hand" ToolTip="Rotate Mode (R)" BorderThickness="2">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/rotate.png"/>
+                    </Button.Background>
+                </Button>
+              
+                    <Button Name="Button_ScaleHor" Click="SetModeScaleHor" Width="20" Height="20" Cursor="Hand"   BorderThickness="2" ToolTip="Scale Horizontally Mode (J)">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Images/scale_hor.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button Name="Button_ScaleVer" Click="SetModeScaleVer" Width="20" Height="20" Cursor="Hand"   BorderThickness="2" ToolTip="Scale Vertically Mode (K)">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Images/scale_ver.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button Name="Button_Scale" Click="SetModeScale" Width="20" Height="20" Cursor="Hand" ToolTip="Scale Uniform Mode (C)" BorderThickness="2">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Images/scale.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button Name="ButtonUVMore" Height="20" Width="20" Content="..." Click="OpenUVMore"> 
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                                <MenuItem Header="Project"  Click="ProjectUV"  Background="LightGray" BorderBrush="LightGray" />
+
+                                <MenuItem Header="Negate Us"  Click="NegateUs"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Negate Vs"  Click="NegateVs"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Swap Us and Vs" Click="SwapUVs"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Swap two"  Click="SwaptwoUVs"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Rotate 90C"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Rotate -90C"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Align Horizontally"  Click="AlignUVsHorizontally"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Align Verticallly"  Click="AlignUVsVertically"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Fit"  Click="FitUVFromEditor"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Collapse"  Click="CollapseUV"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Clamp"  Click="ClampUVsTo_0_1_fromEditor"  Background="LightGray" BorderBrush="LightGray" />
+                            <MenuItem Header="Snap"  Background="LightGray" BorderBrush="LightGray" >
+                                <MenuItem Background="LightGray" BorderBrush="LightGray" Header="U+" Click="SnapUV_Up"/>
+                                <MenuItem Background="LightGray" BorderBrush="LightGray" Header="U-" Click="SnapUV_Um"/>
+                                <MenuItem Background="LightGray" BorderBrush="LightGray" Header="V+" Click="SnapUV_Vp"/>
+                                <MenuItem Background="LightGray" BorderBrush="LightGray" Header="V-" Click="SnapUV_Vm"/>
+
+                                <MenuItem Background="LightGray" BorderBrush="LightGray" Header="to nearest" Click="SnapUV_Nearest"/>
+                                <MenuItem Background="LightGray" BorderBrush="LightGray" Header="in middle" Click="SnapUV_Mid"/>
+
+                            </MenuItem>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                </StackPanel>
+
+                <!-- U and V text fields -->
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="U" Width="15"/>
+                    <TextBox Width="80"  MouseDown="HitEnterUV_U"  ToolTip="Hit Enter to change"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="V" Width="15"/>
+                    <TextBox Width="80" KeyDown="HitEnterUV_V"  ToolTip="Hit Enter to change"/>
+            </StackPanel>
+            <!-- Grid size input -->
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Grid size:" Width="55" />
+                <TextBox Name="Input_UVMapperGridSize" Width="40" TextChanged="ChangedUVGrid"/>
+            </StackPanel>
+
+            <!-- Alignment and snapping options -->
+            <TextBlock Text="Map on:" Width="50" VerticalAlignment="Center"/>
+            <ComboBox Name="Combo_UVTextures" Width="100" SelectionChanged="SelectedUVTexture"/>
+
+            </StackPanel>
+            
+        
+        </Grid>
+
+        <Grid Name="AnimatorPanel" Visibility="Collapsed" Grid.Column="1" Grid.Row="3" Background="Black" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+
+            </Grid.RowDefinitions>
+            <StackPanel   Grid.Column="0" Margin="5">
+                <ScrollViewer Name="Timeline_Viewer" HorizontalScrollBarVisibility="Visible" Width="300"  VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Left">
+                    <StackPanel Name="Timeline"  Height="20" Orientation="Horizontal" Background="Gray" HorizontalAlignment="Left"/>
+
+
+                </ScrollViewer>
+
+
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Current Track:" Margin="5" Foreground="White" Height="20" TextDecorations="Underline"/>
+                    <TextBox Name="InputCurrentTrack" Width="50" Margin="5" Height="20" KeyDown="EnteredTrackInAnimator"   />
+                    <Button Content="Play/Pause" Click="PlayAnimation" IsEnabled="False" Width="100" Margin="20,0,0,0" Height="30"   Foreground="White"  Cursor="Hand" Background="#FF404040"/>
+
+                </StackPanel>
+                <!-- // /////////////////////////////////////////////////////// // -->
+                <StackPanel Orientation="Horizontal">
+
+
+                    <Button Name="ButtonSequenceOptions" HorizontalAlignment="Left" Content="Tools" Width="80" Height="30" Margin="5" Click="ShowAnimatorOptionss"    Foreground="White"  Cursor="Hand" Background="#FF404040">
+                        <Button.ContextMenu>
+                            <ContextMenu Name="AnimatorOptions">
+                                <!-- Reset Track Options -->
+
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Make same as first previous" Click="MakeAsFirstPrevius"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Make same as first next" Click="MakeAsFirstNext"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Swap names with..." Click="SwapSequenceNames"/>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Missing keyframes" >
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Add missing starting and ending keyframes based on existing ones" Click="MissingKeyframes1"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Add default missing starting and ending keyframes" Click="MissingKeyframes2"/>
+
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Reset in this track">
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All" Click="ResetTrackAll"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Translations" Click="ResetTrackTrans"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Rotations" Click="ResetTrackRot"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Scalings" Click="ResetrackScale"/>
+                                </MenuItem>
+
+                                <!-- Clear Track Options -->
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Clear in this track">
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All" Click="ClearTrackAll"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Translations" Click="ClearTrackTrans"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Rotations" Click="ClearTrackRot"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Scalings" Click="ClearTrackScale"/>
+                                </MenuItem>
+
+                                <!-- Clear Sequence Options -->
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Clear in this sequence">
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All" Click="ClearSequenceAll"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Translations" Click="ClearSequenceTrans"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Rotations" Click="ClearSequenceRot"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Scalings" Click="ClearSequenceScale"/>
+
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Clear in all sequences">
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All" Click="ClearSequencesAll"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Translations" Click="ClearSequencesTrans"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Rotations" Click="ClearSequencesRot"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Scalings" Click="ClearSequencesScale"/>
+
+                                </MenuItem>
+                                <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="Remove">
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All sequences" Click="removeAllSequences"/>
+                                    <MenuItem Background="LightGray"   BorderBrush="LightGray"  Header="All global sequences" Click="removeAllGlobalSequences"/>
+                                </MenuItem>
+
+                                <MenuItem Header="All Sequnces"  Background="LightGray"   BorderBrush="LightGray">
+                                    <MenuItem Header="Remap all sequences"  Background="LightGray"   BorderBrush="LightGray"  Click="RemapSequences"/>
+
+                                    <MenuItem Header="Reverse Keyframes Order For All Sequences..."  Background="LightGray"   BorderBrush="LightGray"  Click="ReverseSequenceOrderAll"/>
+                                    <MenuItem Header="Quantize All Sequences..." IsEnabled="False" Background="LightGray"   BorderBrush="LightGray"  Click="QuantizeAllSequences"/>
+                                    <MenuItem Header="Tile loop..."  Background="LightGray"   BorderBrush="LightGray"  Click="TileLoopSequenceAll"/>
+                                    <MenuItem Header="Fill gaps..."  Background="LightGray"   BorderBrush="LightGray"  Click="FillGapsAll"/>
+                                    <MenuItem Header="Mirror..."  Background="LightGray"   BorderBrush="LightGray"  Click="MirrorSequenceAll"/>
+                                    <MenuItem Header="Close gaps between all sequences"  Background="LightGray"   BorderBrush="LightGray"  Click="CloseGapsSequences"/>
+                                    <MenuItem Header="Alphabetize"  Background="LightGray"   BorderBrush="LightGray"  Click="Alphabetize" IsEnabled="False"/>
+
+
+                                </MenuItem>
+
+                                <MenuItem Header="Sequnce"  Background="LightGray"   BorderBrush="LightGray">
+                                    <MenuItem Header="Resize sequence..."  Background="LightGray"   BorderBrush="LightGray"  Click="ResizeSequence"/>
+                                    <MenuItem Header="Merge..."  Background="LightGray"   BorderBrush="LightGray"  Click="MergeSequence"/>
+                                    <MenuItem Header="Split..."  Background="LightGray"   BorderBrush="LightGray"  Click="SplitSequence"/>
+                                    <MenuItem Header="Tile loop..."  Background="LightGray"   BorderBrush="LightGray"  Click="TileLoopSequence"/>
+                                    <MenuItem Header="Fill gaps..."  Background="LightGray"   BorderBrush="LightGray"  Click="FillGaps"/>
+                                    <MenuItem Header="Quantize" IsEnabled="False"  Background="LightGray"   BorderBrush="LightGray"  Click="Quantize"/>
+                                    <MenuItem Header="Mirror..."  Background="LightGray"   BorderBrush="LightGray"  Click="MirrorSequenceOne"/>
+                                    <MenuItem Header="Reverse Keyframes Order..."  Background="LightGray"   BorderBrush="LightGray"  Click="ReverseSequenceOrder"/>
+
+
+                                </MenuItem>
+                                <MenuItem Header="Inspector"  Background="LightGray"   BorderBrush="LightGray">
+                                    <MenuItem Header="Copy all sequences for keyframes"  Background="LightGray"   BorderBrush="LightGray"  Click="CopyForKeyframes"/>
+                                    <MenuItem Header="Which sequences are not animated?"  Background="LightGray"   BorderBrush="LightGray"  Click="question1"/>
+                                    <MenuItem Header="Which bones are not animated?"  Background="LightGray"   BorderBrush="LightGray"  Click="question2"/>
+                                    <MenuItem Header="Show me all unused gaps/intervals up to 999,999"  Background="LightGray"   BorderBrush="LightGray"  Click="question3"/>
+
+                                </MenuItem>
+
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button HorizontalAlignment="Left" Content="Next" Width="80" Height="30" Margin="5" Click="NextAnimatedTrack"    Foreground="White"  Cursor="Hand" Background="#FF404040"/>
+                    <Button HorizontalAlignment="Left" Content="Prev" Width="80" Height="30" Margin="5" Click="PrevAnimatedTrack"    Foreground="White"  Cursor="Hand" Background="#FF404040"/>
+
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="ButtonCopyFrame" Content="Copy Frame" Click="CopyFrame" Cursor="Hand" Padding="5"  Background="#FF404040" Foreground="White" Height="30" Margin="5"/>
+                    <Button Name="ButtonCutFrame" Content="Cut Frame" Click="CutFrame" Cursor="Hand" Padding="5"  Background="#FF404040" Foreground="White" Height="30" Margin="5"/>
+
+
+                    <Button Name="ButtonPasteFrame" Content="Paste Frame" Click="ClickedPasteFrame" Cursor="Hand" Padding="5"  Background="#FF404040" Foreground="White"
+          Height="30" Margin="5">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Translation" Click="PasteTranslation"  Background="LightGray" BorderBrush="LightGray"/>
+                                <MenuItem Header="Rotation" Click="PAsteRotation"  Background="LightGray" BorderBrush="LightGray"/>
+                                <MenuItem Header="Sclaing" Click="PasteScaling"  Background="LightGray" BorderBrush="LightGray"/>
+                                <MenuItem Header="All" Click="PasteFrameAll"   Background="LightGray" BorderBrush="LightGray"/>
+                                <MenuItem   Background="LightGray" BorderBrush="LightGray">
+                                    <MenuItem.Header>
+                                        <CheckBox Name="Check_OverwritePastedFrame" Content="Overwrite" />
+                                    </MenuItem.Header>
+                                   
+                                </MenuItem>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                </StackPanel>
+                <!-- // /////////////////////////////////////////////////////// // -->
+            </StackPanel>
+            <StackPanel Margin="5" Grid.Column="1">
+                <TextBlock Name="LabelSequences" Text="Sequences" Foreground="White" TextDecorations="Underline"/>
+                <ListBox Name="ListSequences" Height="100" SelectionMode="Single" SelectionChanged="SelectedSequence" />
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="40" Name="ButtonNewSeq" MouseDown="NewSequence" Click="NewSequenceSingle" Margin="5" ToolTip="Right-click for multiple sequences creator" Foreground="White"  Background="#FF404040"  Cursor="Hand" >New</Button>
+                    <Button Width="40" Name="ButtonEditSequence"  Margin="5" Click="EditSequence" Foreground="White"  Background="#FF404040"   Cursor="Hand"   >Edit</Button>
+
+
+                    <Button Width="40"  Name="ButtonDelSequenc" Margin="5" Click="DeleteSequence" Foreground="White"  Background="#FF404040"  Cursor="Hand"  >Del</Button>
+                    <Button Width="60"  Name="ButtonDuplSequence"  Margin="5" Click="DuplicateSequence" Foreground="White"  Background="#FF404040"  Cursor="Hand" ToolTip="Create a copy of the selected sequence, with a new name, but the same interval range and animations" >Duplicate</Button>
+                    <Button Width="110" Name="ButtonEditGS"   Margin="5" Click="EditGlobalSequences" FontSize="10" HorizontalAlignment="Right"  Foreground="White"  Cursor="Hand" Background="#FF404040">Edit global sequences</Button>
+
+
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+
+
+
+    </Grid>
+</Window>

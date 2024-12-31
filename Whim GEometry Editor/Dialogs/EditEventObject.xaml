@@ -1,0 +1,46 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.EditEventObject"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d"
+        KeyDown="Window_KeyDown"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="LightGray"
+        Title="Event Object" Height="410" Width="540">
+    <StackPanel>
+        <StackPanel>
+            <TextBlock Text="Tracks:"/>
+            <ListBox Name="List_Tracks" Height="70"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Padding="5" Margin="5" Content="Delete" Click="DelTrack"/>
+                <TextBox Width="100" Name="Input_Track" Height="20"/>
+                <Button Padding="5" Margin="5" Content="Add" Click="AddTrack"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+           
+            <StackPanel  Margin="5">
+                <TextBlock Text="Category"/>
+                <ListBox Name="List_EventCategories" Height="100" Width="150" SelectionMode="Single" SelectionChanged="SelectedCategory"/>
+            </StackPanel>
+            <StackPanel  Margin="5">
+                <TextBlock Text="Data"/>
+                <ListBox Name="List_EventTypes" Height="100" Width="364"  SelectionMode="Single" />
+            </StackPanel>
+            
+            
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Identifier:" Width="100"/>
+            <ComboBox Name="ListIdentifiers" Width="150"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Global sequence:" Width="100"/>
+            <ComboBox Name="ListGlobalSequences" Width="150"/>
+        </StackPanel>
+        <Button Padding="5" Margin="20" Click="Finalize">Set</Button>
+    </StackPanel>
+</Window>

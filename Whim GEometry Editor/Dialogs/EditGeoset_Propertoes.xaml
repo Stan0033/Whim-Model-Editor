@@ -1,0 +1,22 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.EditGeoset_Propertoes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Background="LightGray"
+        KeyDown="Window_KeyDown"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d"
+        Title="Edit geoset properties" Height="120" Width="200">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Selection Group:" Margin="5"/>
+            <TextBox Width="50" Name="InputSelectionGroup" TextChanged="SetSelectionGroup" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <CheckBox Width="100" Name="Check_UnSelectable1" Content="Unselectable" Checked="SetSelectable" Unchecked="SetSelectable" Margin="5"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

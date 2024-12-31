@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Whim Model Editor", "Whim GEometry Editor\Whim Model Editor.csproj", "{A9E2756C-94D9-4507-BBBC-29AC0BA91029}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9E2756C-94D9-4507-BBBC-29AC0BA91029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E2756C-94D9-4507-BBBC-29AC0BA91029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E2756C-94D9-4507-BBBC-29AC0BA91029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E2756C-94D9-4507-BBBC-29AC0BA91029}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2240FD9B-0F5A-42BD-BDEC-A47E39C1E336}
+	EndGlobalSection
+EndGlobal

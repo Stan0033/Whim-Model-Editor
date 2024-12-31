@@ -1,0 +1,35 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.Error_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d"
+        Background="LightGray"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="Unhandled exception - report to the developer!" Height="360" Width="470">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="210"/>
+            <ColumnDefinition Width="210"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <RichTextBox Name="Box"  Background="LightGray"  Grid.Row="0" Grid.ColumnSpan="2"/>
+        
+
+
+        <Button Click="copy" Grid.Row="1" Grid.Column="0" Content="Copy" Padding="10" Margin="10,10,10,0" Height="40" VerticalAlignment="Top"/>
+        <Button Click="ok" Grid.Row="1" Grid.Column="1"  Content="OK" Padding="10" Margin="10,10,10,0" Height="40" VerticalAlignment="Top"/>
+
+    </Grid>
+
+
+
+
+</Window>

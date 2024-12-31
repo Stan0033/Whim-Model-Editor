@@ -1,0 +1,33 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.drawintriangle_window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d" Background="LightGray"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="Draw shape in triangle" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Canvas Name="MyCanvas" Grid.Column="0" MouseMove="Canvas_MouseMove" MouseUp="Canvas_MouseUp" MouseDown="Canvas_MouseDown"/>
+        <StackPanel Grid.Column="1" Background="LightGray">
+            <TextBlock Text="Mode:"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                <Button Content="Select" Click="SetModeSelect" Padding="3" Margin="3"/>
+                <Button Content="Move" Click="SetModeMove" Padding="5" Margin="3"/>
+                <Button Content="Rotate" Click="SetModeRotate" Padding="3" Margin="3"/>
+                <Button Content="Scale" Click="SetModeScale" Padding="3" Margin="3"/>
+            </StackPanel>
+            <TextBlock Text="Create:"/>
+            <Button Content="Triangle" Click="setTriangle" Padding="5" Margin="5"/>
+            <Button Content="Square" Click="setSquare" Padding="5" Margin="5"/>
+            <Button Content="Ngon:" Click="setNgons" Padding="5" Margin="5"/>
+            <TextBox Name="Box" Padding="5" Margin="5" FontSize="14" Text="5"/>
+            <Button Content="Finalize" Click="ok" Padding="5" Margin="5,50,5,0"  VerticalAlignment="Bottom"/>
+        </StackPanel>
+    </Grid>
+</Window>

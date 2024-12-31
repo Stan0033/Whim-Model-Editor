@@ -1,0 +1,39 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.ArrangeVertices_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d"
+        Background="Gray"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="Arrange vertices" Height="250" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Content="Rotation X:" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="5" Click="setx"/>
+        <TextBox x:Name="XInput" Grid.Row="0" Grid.Column="1" Margin="5"/>
+
+        <Button Content="Rotation Y:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="5" Click="sety"/>
+        <TextBox x:Name="YInput" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+        <Button Content="Rotation Z:" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="5" Click="setz"/>
+        <TextBox x:Name="ZInput" Grid.Row="2" Grid.Column="1" Margin="5"/>
+
+        <TextBlock Text="Distance from Centroid:" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="5"/>
+        <TextBox x:Name="DistanceInput" Grid.Row="3" Grid.Column="1" Margin="5"/>
+
+        <Button Content="OK" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right"  Click="OKButton_Click" Width="200" Margin="10" Padding="10"/>
+    </Grid>
+</Window>

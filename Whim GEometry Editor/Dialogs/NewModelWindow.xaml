@@ -1,0 +1,115 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.NewModelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d" Background="LightGray"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        KeyDown="Window_KeyDown"
+        Title="New Model" Height="560" Width="500">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Name" Margin="5"/>
+            <TextBox Name="ModelNAme" Width="100" Margin="5"/>
+        </StackPanel>
+        <TextBlock Text="What are you creating?" Margin="5"/>
+        <ListBox Name="List_Type" Margin="5" Height="100" SelectionChanged="SelectedType" SelectionMode="Single">
+            <ListBoxItem>Empty</ListBoxItem>
+            <ListBoxItem>Organic hero</ListBoxItem>
+            <ListBoxItem>mechanical hero</ListBoxItem>
+            <ListBoxItem>Organic unit</ListBoxItem>
+            <ListBoxItem>Mechanical worker</ListBoxItem>
+            <ListBoxItem>Organic worker</ListBoxItem>
+            <ListBoxItem>Mechanical unit</ListBoxItem>
+            <ListBoxItem>Organic building</ListBoxItem>
+            <ListBoxItem>Mechanical building</ListBoxItem>
+            <ListBoxItem>Attachment</ListBoxItem>
+            <ListBoxItem>Buff</ListBoxItem>
+            <ListBoxItem>Effect</ListBoxItem>
+            <ListBoxItem>Doodad</ListBoxItem>
+            <ListBoxItem>Destructible</ListBoxItem>
+            <ListBoxItem>Item</ListBoxItem>
+            <ListBoxItem>Projectile</ListBoxItem>
+        </ListBox>
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <StackPanel>
+                <TextBlock Text="Add attachments:" Margin="5"/>
+                <ListBox Name="List_Attachments" Height="200" Width="230">
+                    <CheckBox IsChecked="True" IsEnabled="False">Origin Ref</CheckBox>
+                    <CheckBox Name="Overhead">Overhead Ref</CheckBox>
+                    <CheckBox Name="Head">Head Ref</CheckBox>
+                    <CheckBox Name="Chest">Chest Ref</CheckBox>
+                    <CheckBox Name="Feet">Feet Ref</CheckBox>
+                    <CheckBox Name="Mount">Mount Ref (Transport)</CheckBox>
+                    <CheckBox Name="HandLeft">Hand Left Ref</CheckBox>
+                    <CheckBox Name="HandRight">Hand Right Ref</CheckBox>
+                    <CheckBox Name="FootLeft">Foot Left Ref</CheckBox>
+                    <CheckBox Name="FootRight">Foot Right Ref</CheckBox>
+                    <CheckBox Name="WeaponLeft">Weapon Left Ref</CheckBox>
+                    <CheckBox Name="WeaponRight">Weapon Right Ref</CheckBox>
+                    <CheckBox Name="Sprite1">Sprite First Ref (burning building/mechanical unit)</CheckBox>
+                    <CheckBox Name="Sprite2">Sprite Second Ref burning building/mechanical unit)</CheckBox>
+                    <CheckBox Name="Sprite3">Sprite Third Ref (burning building/mechanical unit)</CheckBox>
+                    <CheckBox Name="Sprite4">Sprite Fourth Ref (burning building/mechanical unit)</CheckBox>
+                    <CheckBox Name="Rally">Sprite RallyPoint Ref (building)</CheckBox>
+                </ListBox>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Add sequences:" Margin="5"/>
+                <ListBox Name="List_Sequences" Height="200"  Width="230">
+                    <ListBox.Items>
+                        <CheckBox IsEnabled="False" IsChecked="True">Stand</CheckBox>
+                        <CheckBox IsEnabled="False" IsChecked="True">Death</CheckBox>
+                        <CheckBox Name="StandHit" >Stand Hit</CheckBox>
+                        <CheckBox Name="StandReady" >Stand Ready</CheckBox>
+                        <CheckBox Name="StandVictory" >Stand Victory</CheckBox>
+                        <CheckBox Name="Dissipate"  >Dissipate (hero)</CheckBox>
+                        <CheckBox Name="DeathAlternate" >Death Alternate (destrucble = gate/platform)</CheckBox>
+                        <CheckBox Name="Birth">Birth</CheckBox>
+                        <CheckBox Name="Attack">Attack</CheckBox>
+                        <CheckBox Name="Attack1">Attack One</CheckBox>
+                        <CheckBox Name="Attack2">Attack Two</CheckBox>
+                        <CheckBox Name="AttackSlam">Attack Slam</CheckBox>
+                        <CheckBox Name="AttackWSS">Attack Walk Stand Spin (Bladestorm)</CheckBox>
+                        <CheckBox Name="Decay">Decay</CheckBox>
+                       
+                        <CheckBox Name="DecayBone">Decay Bone (unit)</CheckBox>
+                        <CheckBox Name="DecayFlesh">Decay Flesh (unit)</CheckBox>
+                        <CheckBox Name="Portrait">Portrait</CheckBox>
+                        <CheckBox Name="PortraitTalk">Portrait Talk</CheckBox>
+                        <CheckBox Name="Walk">Walk</CheckBox>
+                        <CheckBox Name="Spell">Spell</CheckBox>
+                        <CheckBox Name="SpellChannel">Spell Channel</CheckBox>
+                        <CheckBox Name="AttackGold">Attack Gold (worker)</CheckBox>
+                        <CheckBox Name="AttackLumber">Attack Lumber (worker)</CheckBox>
+                        <CheckBox Name="StandGold">Stand Gold (worker)</CheckBox>
+                        <CheckBox Name="StandLumber">Stand Lumber (worker)</CheckBox>
+                        <CheckBox Name="StandWork">Stand work (worker)</CheckBox>
+                        <CheckBox Name="StandWorkGold">Stand work gold (worker)</CheckBox>
+                        <CheckBox Name="StandWorkLumber">Stand work lumber (worker)</CheckBox>
+                        <CheckBox Name="WalkGold">Walk gold (worker)</CheckBox>
+                        <CheckBox Name="WalkLumber">Walk lumber (worker)</CheckBox>
+                    </ListBox.Items>
+                </ListBox>
+            </StackPanel>
+        </StackPanel>
+       
+        
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Building  - Tiers:" Width="100"/>
+            <ComboBox Name="TierPicker" Width="100" SelectedIndex="0">
+                <ComboBox.Items>
+                    <ComboBoxItem Content="0"/>
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                </ComboBox.Items>
+            </ComboBox>
+            <CheckBox Name="Check_Morph" Content="Object has morph animations"/>
+        </StackPanel>
+        <Button Padding="10" Margin="20" Click="Create">Create</Button>
+    </StackPanel>
+</Window>

@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Dialogs\About_w.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\AdjustAll.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\ArrangeVertices_Window.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\AttachInfoGeosets.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\CMessageBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\CreatePlane.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\Create_Shape.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\Create_Skeleton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\drawintriangle_window.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\DrawWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\DuplicateAlongAxis_Window.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\DuplicateSequence.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\EditEventObject.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\EditGeoset_Propertoes.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\Editor_Emitter1.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\editor_emitter2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\Editor_Light.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\Editor_Ribbon.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\edit_Attachment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\edit_geo_vis.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\edit_keyframe.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\Error_Window.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\Explanation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\gettingstarted.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\import_animations.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\import_geoset.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\InputCoordinate.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\MDLX_Window.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\MirrorSequence.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\MultipleSequence.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\NewModelWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\quickClean.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\remap_sq.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\ResizeSequence.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\SelectTransformations.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\SequencesSelector.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\SetDistanceDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\Settings.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\simple_anim.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\SplitSEquenceDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\TextReader.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\TextureProperties.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\ToFitIn.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="editgs.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ErrorChecker.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Material_Manager.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Node Editors\bone_Data_editor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Node Editors\Edit_Cols.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="geosetanims.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Input.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="listbones.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Optimizer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Selector.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="sequence.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Texture_Animation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Texture_Manager.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Transformation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="NodePropertiesEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Dialogs\About_w.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\AdjustAll.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\ArrangeVertices_Window.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\AttachInfoGeosets.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\CMessageBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\CreatePlane.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Create_Shape.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Create_Skeleton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\drawintriangle_window.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\DrawWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\DuplicateAlongAxis_Window.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\DuplicateSequence.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\EditEventObject.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\EditGeoset_Propertoes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Editor_Emitter1.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\editor_emitter2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Editor_Light.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Editor_Ribbon.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\edit_Attachment.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\edit_geo_vis.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\edit_keyframe.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Error_Window.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Explanation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\gettingstarted.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\import_animations.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\import_geoset.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\InputCoordinate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\MDLX_Window.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\MirrorSequence.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\MultipleSequence.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\NewModelWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\quickClean.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\remap_sq.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\ResizeSequence.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\SelectTransformations.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\SequencesSelector.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\SetDistanceDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Settings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\simple_anim.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\SplitSEquenceDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\TextReader.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\TextureProperties.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\ToFitIn.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="editgs.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ErrorChecker.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Material_Manager.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Node Editors\bone_Data_editor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Node Editors\Edit_Cols.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="geosetanims.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Input.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="listbones.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Optimizer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Selector.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="sequence.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Texture_Animation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Texture_Manager.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Transformation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="NodePropertiesEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

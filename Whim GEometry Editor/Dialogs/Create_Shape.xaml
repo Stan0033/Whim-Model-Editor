@@ -1,0 +1,54 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.Create_Shape"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d"
+        KeyDown="Window_KeyDown"
+        Background="LightGray"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="Create Shape" Height="360" Width="300">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5" >
+            <RadioButton Name="Check_Cube" IsEnabled="False" Margin="5"   Checked="checkedCube">Cube</RadioButton>
+            <RadioButton  Name="Check_Sphere" IsEnabled="False" Margin="5" Checked="checkedSphere">Sphere</RadioButton>
+            <RadioButton Name="Check_Cone"  IsEnabled="False" Margin="5" Checked="checkedCone">Cone</RadioButton>
+            <RadioButton  Name="Check_Cyl"  IsEnabled="False" Margin="5" Checked="Checekdcyl">Cyllinder</RadioButton>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Cuts:" Margin="5" Width="70"/>
+            <TextBox Name="InputCuts"  Text="1" Margin="5" Width="100"/>
+            <TextBlock Text="(Max 20)" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Sections:" Margin="5" Width="70"/>
+            <TextBox Name="InputSections"  Text="3" Margin="5" Width="100"/>
+            <TextBlock Text="(Max 50)" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Slices:" Margin="5" Width="70"/>
+            <TextBox Name="InputSlices"  Text="3" Margin="5" Width="100"/>
+            <TextBlock Text="(Max 50)" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Material:" Margin="5" Width="70"/>
+            <ComboBox Name="lsit_material" Width="150"/>
+        </StackPanel>
+        <StackPanel   Margin="5" Orientation="Horizontal">
+            <CheckBox Margin="5" Name="Check_Geoset" Checked="Checked_IncludeInGeoset" Unchecked="Checked_IncludeInGeoset">Include in geoset:</CheckBox>
+            <ComboBox Name="list_Geosets" Width="100" Margin="5,0,5,0" HorizontalAlignment="Left"/>
+            
+           
+        </StackPanel>
+        <StackPanel   Margin="5" Orientation="Horizontal">
+            <CheckBox Name="Check_Bone" Content="Attach to bone:" Margin="5" Width="110"/>
+            <ComboBox Name="list_bones" Width="150" Margin="5,0,5,0" HorizontalAlignment="Left"/>
+             
+
+        </StackPanel>
+
+        <Button Padding="5" Margin="20" Content="Create" Click="Create"/>
+    </StackPanel>
+</Window>

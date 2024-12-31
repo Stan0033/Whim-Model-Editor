@@ -1,0 +1,137 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.Create_Skeleton"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        Background="LightGray"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Create Skeleton" Height="550" Width="800">
+    <StackPanel>
+        <TextBlock Text="Creating a skeleton will overwrite the nodes list" Foreground="Red"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
+            <StackPanel>
+                <CheckBox Content="Base" IsChecked="True" IsEnabled="False"/>
+                <StackPanel Margin="20,0,0,0">
+                    <CheckBox Content="Spine" />
+                    <StackPanel Margin="20,0,0,0">
+                        <CheckBox Content="Neck" />
+                        <StackPanel Margin="20,0,0,0">
+                            <CheckBox Content="Head" />
+                        </StackPanel>
+                        <CheckBox Content="Chest" />
+                        <CheckBox Content="Pelvis" />
+                        <StackPanel Margin="20,0,0,0">
+                            <CheckBox Content="Hip Left" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Knee Left" />
+                                <StackPanel Margin="20,0,0,0">
+                                    <CheckBox Content="Ankle Left" />
+                                    <StackPanel Margin="20,0,0,0">
+                                        <CheckBox Content="Toes Left" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                            <CheckBox Content="Hip Right" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Knee Right" />
+                                <StackPanel Margin="20,0,0,0">
+                                    <CheckBox Content="Ankle Right" />
+                                    <StackPanel Margin="20,0,0,0">
+                                        <CheckBox Content="Toes Right" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <CheckBox Content="Shoulder Left" />
+                <StackPanel Margin="20,0,0,0">
+                    <CheckBox Content="Elbow Left" />
+                    <StackPanel Margin="20,0,0,0">
+                        <CheckBox Content="Wrist Left" />
+                        <StackPanel Margin="20,0,0,0">
+                            <CheckBox Content="Finger Thumb Left Proximal" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Finger Thumb Left Distal" />
+                            </StackPanel>
+                            <CheckBox Content="Finger Index Left Proximal" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Finger Index Left Middle" />
+                                <StackPanel Margin="20,0,0,0">
+                                    <CheckBox Content="Finger Index Left Distal" />
+                                </StackPanel>
+                            </StackPanel>
+                            <CheckBox Content="Finger Middle Left Proximal" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Finger Middle Left Middle" />
+                                <StackPanel Margin="20,0,0,0">
+                                    <CheckBox Content="Finger Middle Left Distal" />
+                                </StackPanel>
+                            </StackPanel>
+                            <CheckBox Content="Finger Ring Left Proximal" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Finger Ring Left Middle" />
+                                <StackPanel Margin="20,0,0,0">
+                                    <CheckBox Content="Finger Ring Left Distal" />
+                                </StackPanel>
+                            </StackPanel>
+                            <CheckBox Content="Finger Pinky Left Proximal" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Finger Pinky Left Middle" />
+                                <StackPanel Margin="20,0,0,0">
+                                    <CheckBox Content="Finger Pinky Left Distal" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <CheckBox Content="Shoulder Right" />
+                <StackPanel Margin="20,0,0,0">
+                    <CheckBox Content="Elbow Right" />
+                    <StackPanel Margin="20,0,0,0">
+                        <CheckBox Content="Wrist Right" />
+                        <StackPanel Margin="20,0,0,0">
+                            <CheckBox Content="Finger Thumb Right Proximal" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Finger Thumb Right Distal" />
+                            </StackPanel>
+                            <CheckBox Content="Finger Index Right Proximal" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Finger Index Right Middle" />
+                                <StackPanel Margin="20,0,0,0">
+                                    <CheckBox Content="Finger Index Right Distal" />
+                                </StackPanel>
+                            </StackPanel>
+                            <CheckBox Content="Finger Middle Right Proximal" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Finger Middle Right Middle" />
+                                <StackPanel Margin="20,0,0,0">
+                                    <CheckBox Content="Finger Middle Right Distal" />
+                                </StackPanel>
+                            </StackPanel>
+                            <CheckBox Content="Finger Ring Right Proximal" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Finger Ring Right Middle" />
+                                <StackPanel Margin="20,0,0,0">
+                                    <CheckBox Content="Finger Ring Right Distal" />
+                                </StackPanel>
+                            </StackPanel>
+                            <CheckBox Content="Finger Pinky Right Proximal" />
+                            <StackPanel Margin="20,0,0,0">
+                                <CheckBox Content="Finger Pinky Right Middle" />
+                                <StackPanel Margin="20,0,0,0">
+                                    <CheckBox Content="Finger Pinky Right Distal" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <Button Padding="10" Margin="10" Click="ok">OK</Button>
+    </StackPanel>
+    
+</Window>

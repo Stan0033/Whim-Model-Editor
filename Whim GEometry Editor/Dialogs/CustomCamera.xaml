@@ -1,0 +1,72 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Misc.CustomCamera"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Misc"
+        mc:Ignorable="d" Background="LightGray"
+         
+        KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing"
+        Title="Camera Controller" Height="470" MinHeight="470" MinWidth="300" MaxWidth="300">
+    <StackPanel Margin="10">
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Width="60" Text="Pos X:" FontSize="14"/>
+            <TextBox Name="InputX" FontSize="14" Width="100" Text="0"/>
+            <Button Content="&lt;" Width="20" Click="DecrementX" Margin="5"/>
+            <Button Content="&gt;" Width="20" Click="IncrementX" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Width="60" Text="Pos Y:" FontSize="14" />
+            <TextBox Name="InputY" FontSize="14" Width="100" Text="0"/>
+            <Button Content="&lt;" Width="20" Click="DecrementY" Margin="5"/>
+            <Button Content="&gt;" Width="20" Click="IncrementY" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Width="60" Text="Pos Z:" FontSize="14"/>
+            <TextBox Name="InputZ" FontSize="14" Width="100" Text="10"/>
+            <Button Content="&lt;" Width="20" Click=" DecrementZ" Margin="5"/>
+            <Button Content="&gt;" Width="20" Click="IncrementZ" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Width="60" Text="Target X:" FontSize="14"/>
+            <TextBox Name="InputCX" FontSize="14" Width="100"/>
+            <Button Content="&lt;" Width="20" Click="DecrementCX" Margin="5"/>
+            <Button Content="&gt;" Width="20" Click="IncrementCX" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Width="60" Text="Target Y:" FontSize="14"/>
+            <TextBox Name="InputCY" FontSize="14" Width="100" Text="0"/>
+            <Button Content="&lt;" Width="20" Click="IncrementCY" Margin="5"/>
+            <Button Content="&gt;" Width="20" Click="DecrementCY" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Width="60" Text="Target Z:" FontSize="14"/>
+            <TextBox Name="InputCZ" FontSize="14" Width="100"/>
+            <Button Content="&lt;" Width="20" Click="IncrementCZ" Margin="5"/>
+            <Button Content="&gt;" Width="20" Click="DecrementCZ" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Width="60" Text="Roll X:" FontSize="14"/>
+            <TextBox Name="InputUX" FontSize="14" Width="100" Text="1"/>
+            <Button Content="&lt;" Width="20" Click="DecrementUX" Margin="5"/>
+            <Button Content="&gt;" Width="20" Click="IncrementUX" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Width="60" Text="Roll Y:" FontSize="14"/>
+            <TextBox Name="InputUY" FontSize="14" Width="100" Text="0"/>
+            <Button Content="&lt;" Width="20" Click="DecrementUY" Margin="5"/>
+            <Button Content="&gt;" Width="20" Click="IncrementUY" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Width="60" Text="Roll Z:" FontSize="14"/>
+            <TextBox Name="InputUZ" FontSize="14" Width="100" Text="0"/>
+            <Button Content="&lt;" Width="20" Click="DecrementUZ" Margin="5"/>
+            <Button Content="&gt;" Width="20" Click="IncrementUZ" Margin="5"/>
+        </StackPanel>
+        <TextBlock Text="Eye = Pos, Center = Target"/>
+        <Button Padding="5" Margin="5" Content="Set" Click="Set"/>
+    </StackPanel>
+</Window>

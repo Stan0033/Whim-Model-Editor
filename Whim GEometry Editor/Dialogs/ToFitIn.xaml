@@ -1,0 +1,50 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.ToFitIn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d" Background="LightGray"
+        ResizeMode="NoResize"
+        KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterScreen"
+        Title="Scale to fit in" Height="310" Width="228">
+    <StackPanel Margin="5">
+        <RadioButton IsChecked="True" Name="check_Box" Checked="CheckBoxBounds">Box</RadioButton>
+        <StackPanel Name="Panel_Box">
+            
+         
+        <StackPanel Margin="5" Orientation="Horizontal">
+            <TextBlock Width="80" Text="Minimum X"/>
+            <TextBox Name="i_minx" Width="100" Text="0"/>
+        </StackPanel>
+        <StackPanel Margin="5" Orientation="Horizontal">
+            <TextBlock Width="80" Text="Minimum Y"/>
+            <TextBox Name="i_miny"  Width="100" Text="0"/>
+        </StackPanel>
+        <StackPanel Margin="5" Orientation="Horizontal">
+            <TextBlock Width="80" Text="Minimum Z"/>
+            <TextBox Name="i_minz"  Width="100" Text="0"/>
+        </StackPanel>
+        <StackPanel Margin="5" Orientation="Horizontal">
+            <TextBlock Width="80" Text="Maximum X"/>
+            <TextBox Name="i_maxx"  Width="100" Text="0"/>
+        </StackPanel>
+        <StackPanel Margin="5" Orientation="Horizontal">
+            <TextBlock Width="80" Text="Maximum Y"/>
+            <TextBox Name="i_maxy"  Width="100" Text="0"/>
+        </StackPanel>
+        <StackPanel Margin="5" Orientation="Horizontal">
+            <TextBlock Width="80" Text="Maximum Z"/>
+            <TextBox  Name="i_maxz" Width="100" Text="0"/>
+        </StackPanel>
+        </StackPanel>
+        <RadioButton Checked="UnlockBounds" >Sphere</RadioButton>
+        <StackPanel Margin="5" Orientation="Horizontal">
+            <TextBlock Width="80" Text="Bounds Radius"/>
+            <TextBox  Name="i_bounds" Width="100" Text="0" IsEnabled="False"/>
+        </StackPanel>
+        <Button Margin="5" Click="Send" Padding="5" >Apply</Button>
+    </StackPanel>
+</Window>
+

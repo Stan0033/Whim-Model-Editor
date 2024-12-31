@@ -1,0 +1,53 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.edit_keyframe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="LightGray"
+        Title="edit_keyframe" Height="200" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Translation -->
+        <TextBlock Text="Translation:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center" />
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <TextBox Name="TranslationXTextBox" Width="50" Margin="5" VerticalAlignment="Center" ToolTip="X" Text="0"/>
+            <TextBox Name="TranslationYTextBox" Width="50" Margin="5" VerticalAlignment="Center" ToolTip="Y" Text="0" />
+            <TextBox Name="TranslationZTextBox" Width="50" Margin="5" VerticalAlignment="Center" ToolTip="Z" Text="0" />
+        </StackPanel>
+
+        <!-- Rotation -->
+        <TextBlock Text="Rotation:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center" />
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <TextBox Name="RotationXTextBox" Width="50" Margin="5" VerticalAlignment="Center" ToolTip="X"  Text="0"/>
+            <TextBox Name="RotationYTextBox" Width="50" Margin="5" VerticalAlignment="Center" ToolTip="Y" Text="0" />
+            <TextBox Name="RotationZTextBox" Width="50" Margin="5" VerticalAlignment="Center" ToolTip="Z" Text="0" />
+        </StackPanel>
+
+        <!-- Scale -->
+        <TextBlock Text="Scale:" Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center" />
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+            <TextBox Name="ScaleXTextBox" Width="50" Margin="5" VerticalAlignment="Center" ToolTip="X"  Text="0"/>
+            <TextBox Name="ScaleYTextBox" Width="50" Margin="5" VerticalAlignment="Center" ToolTip="Y" Text="0" />
+            <TextBox Name="ScaleZTextBox" Width="50" Margin="5" VerticalAlignment="Center" ToolTip="Z" Text="0" />
+        </StackPanel>
+
+        <!-- OK Button -->
+        <Button Content="OK" Click="ok" Grid.Row="3" Grid.ColumnSpan="2" Margin="10" Width="300" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </Grid>
+</Window>
+

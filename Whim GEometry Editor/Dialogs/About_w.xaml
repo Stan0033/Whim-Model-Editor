@@ -1,0 +1,31 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.About_w"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        ResizeMode="NoResize"
+        Background="LightGray"
+        KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="About Whim! Model Editor" Height="260" Width="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <!-- Column for the image -->
+            <ColumnDefinition Width="Auto" />
+            <!-- Column for the text block -->
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Image on the left -->
+        <Image Grid.Column="0" Height="200" Width="200" Source="/Dialogs/icon_old.jpg" HorizontalAlignment="Left" Margin="20"/>
+
+        <!-- TextBlock in the second column -->
+        <TextBlock Grid.Column="1" Name="Data" Margin="10" Foreground="Black" 
+                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                   TextWrapping="Wrap" FontSize="14">
+            
+        </TextBlock>
+    </Grid>
+</Window>

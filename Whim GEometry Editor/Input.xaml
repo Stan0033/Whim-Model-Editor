@@ -1,0 +1,16 @@
+﻿<Window x:Class="Whim_Model_Editor.UserInput"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_Model_Editor"
+        mc:Ignorable="d"
+        KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="Input" Height="110" Width="300">
+    <StackPanel Margin="5">
+        <TextBox x:Name="Box" Margin="5"/>
+        <Button Margin="5" Content="OK" FontSize="16" Click="Accept"/>
+    </StackPanel>
+</Window>

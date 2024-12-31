@@ -1,0 +1,25 @@
+﻿<Window x:Class="Whim_GEometry_Editor.Dialogs.DrawWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_GEometry_Editor.Dialogs"
+        ResizeMode="NoResize"
+        KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterScreen"
+        Background="LightGray"
+        mc:Ignorable="d"
+        Title="Draw an extruded 2D shape" Height="450" Width="800">
+    <Grid>
+        <Canvas Name="drawingCanvas" Background="LightSlateGray"  Margin="10,10,150,10"  MouseDown="DrawingCanvas_MouseDown" MouseMove="DrawingCanvas_MouseMove" MouseUp="DrawingCanvas_MouseUp"/>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
+            <Button Name="pencilButton" Content="Pencil Mode" Click="PencilButton_Click" Margin="5" Padding="5" />
+            <Button Name="lineButton" Content="Line Mode" Click="LineButton_Click" Margin="5"  Padding="5" />
+            <Button Name="undoButton" Content="Undo" Click="UndoButton_Click" Margin="5" Padding="5"  />
+            <Button Name="redoButton" Content="Redo" Click="RedoButton_Click" Margin="5" Padding="5"  />
+            <Button Name="clearutton" Content="Clear" Click="ClearButton_Click" Margin="5" Padding="5"  />
+            <Button Name="okButton" Content="Create" Click="OkButton_Click" Margin="5" Padding="5"  />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="Whim_Model_Editor.editgs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whim_Model_Editor"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterScreen"
+        Background="LightGray"
+        Title="Edit global sequences" Height="230" Width="200">
+    <StackPanel>
+        <ListBox Name="list" Height="100" MouseDoubleClick="Delgs" SelectionMode="Single" SelectionChanged="Selctedgs">
+            
+        </ListBox>
+      
+        <StackPanel Margin="5">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Duration:" Width="60"/>
+                <TextBox Name="input" Width="140"/>
+            </StackPanel>
+            <Button Click="update" Padding="5">Update</Button>
+            <Button Click="add" Padding="5">Add</Button>
+
+        </StackPanel>
+        
+    </StackPanel>
+</Window>
